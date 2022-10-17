@@ -159,15 +159,19 @@
 
         const btn = document.querySelector("#btn_submit_query");
         const input = document.querySelector("#input_query_order");
+        let firstLoad = true;
 
-        //當頁面載入時，以session內的userId去get所有訂單
         window.onload = () => {
+            
+            //當頁面載入時，以session內的userId去get所有訂單 
             get("/" + sessionStorage.getItem('userId'));
+            // 如果有登入，要將上面的「登入/註冊」改為招呼語
             if(sessionStorage.getItem("userId") != null){
                 
                  document.querySelector("#li_login_signup").innerHTML = `Hi, ${sessionStorage.getItem("userName")}`;
                 // document.querySelector("#a_login_signup").remove();
             }
+            
         }
 
         //以訂單編號搜尋
@@ -188,7 +192,13 @@
             await fetch(baseUrl + id)
                 .then((res) => res.json())
                 .then((data) => {
-                    if (data.result == null) {
+                    console.log(firstLoad);
+                    
+                    if (data.result.length == 0) {
+                        if(firstLoad){
+                            window.location.href = "../common/order_blank.html";
+                            return;
+                        }
                         alert("此訂單編號不存在!");
                         return;
                     } else {
@@ -226,9 +236,12 @@
                 default:
                     break;
             }
+
+            firstLoad = false;
+
             return `<tr>
             <td>${orderId}</td>
-            <td>${orderTime.split("T")[0] + orderTime.split("T")[1].substring(0,5)}</td>
+            <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0,5)}</td>
             <td>${orderAmount}</td>
             <td><a href="#">查看</td>
             <td>${storeName}</td>
