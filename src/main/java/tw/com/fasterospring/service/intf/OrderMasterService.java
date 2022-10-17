@@ -8,6 +8,7 @@ public interface OrderMasterService {
 	public Result getByUserId(Integer userId);
 	public Result getByUserId(Integer userId, Integer OrderId);
 	public Result getByStoreId(Integer storeId);
+	public Result getByStoreId(Integer storeId, Integer orderId);
 	public Result getById(Integer id);
 
 	

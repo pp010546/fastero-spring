@@ -2,12 +2,17 @@ package tw.com.fasterospring.vo;
 
 import java.sql.Blob;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -17,6 +22,10 @@ import lombok.Data;
 @Table(name = "Store")
 @Data
 @Component
+@NamedQueries({
+	@NamedQuery(name = "selectAllStore", query = "FROM StoreVO"),
+	@NamedQuery(name = "selectStoreByAccount", query = "FROM StoreVO WHERE storeAdminAccount = :account")
+})
 public class StoreVO {
 	
 	@Id
@@ -65,5 +74,8 @@ public class StoreVO {
 	private Integer storeTotalStar;
 	@Column(name = "store_business_time")
 	private String storeBusinessTime;
+	
+//	@OneToMany(mappedBy = "store")
+//	private List<OrderMasterVOForHistory> orders;
 
 }

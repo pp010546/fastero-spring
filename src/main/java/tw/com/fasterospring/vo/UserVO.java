@@ -40,7 +40,7 @@ public class UserVO {
 		private String userName;
 		@Column(name = "user_phone")
 		private String userPhone;
-		@Column(name = "user_build_time", insertable = false)
+		@Column(name = "user_build_time", insertable = false, updatable = false)
 		private LocalDateTime userBuildTime;
 
 }

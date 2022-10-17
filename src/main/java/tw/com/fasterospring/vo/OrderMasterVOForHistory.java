@@ -7,8 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
@@ -19,11 +23,12 @@ import lombok.Data;
 
 @Entity
 @Table(name = "OrderMaster")
-@SecondaryTable(name = "Store", pkJoinColumns = @PrimaryKeyJoinColumn(name="store_id"))
+//@SecondaryTable(name = "Store", pkJoinColumns = @PrimaryKeyJoinColumn(name="store_id"))
 @Data
 @Component
 @NamedQueries({
-	@NamedQuery(name = "selectByUserId", query = "FROM OrderMasterVOForHistory WHERE userId = :userId")
+	@NamedQuery(name = "selectByUserId", query = "FROM OrderMasterVOForHistory WHERE userId = :userId"),
+	@NamedQuery(name = "selectByStoreId", query = "FROM OrderMasterVOForHistory WHERE storeId = :storeId")
 })
 public class OrderMasterVOForHistory {
 	
@@ -45,7 +50,10 @@ public class OrderMasterVOForHistory {
 	private LocalDateTime updateTime;
 	@Column(name = "order_remark")
 	private String orderRemark;
-	@Column(table = "Store", name = "store_name")
-	private String storeName;
+//	@Column(table = "Store", name = "store_name")
+//	private String storeName;
+	@ManyToOne
+	@JoinColumn(name = "store_id", insertable = false, updatable = false)
+	private StoreVO store;
 
 }

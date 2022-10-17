@@ -3,15 +3,35 @@ package tw.com.fasterospring.dao.impl;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import tw.com.fasterospring.dao.intf.StoreDAO;
 import tw.com.fasterospring.vo.StoreVO;
+import tw.com.fasterospring.vo.UserVO;
 
-public class StoreDAOIm implements StoreDAO{
+@Repository
+public class StoreDAOIm implements StoreDAO {
 
+	@Autowired
+	StoreVO vo;
+
+	@PersistenceContext
+	private Session session;
+
+	public Session getSession() {
+		return session;
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<StoreVO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getSession().getNamedQuery("selectAllStore").getResultList();
 	}
 
 	@Override
@@ -40,8 +60,12 @@ public class StoreDAOIm implements StoreDAO{
 
 	@Override
 	public StoreVO getByAccount(String account) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = this.getSession().getNamedQuery("selectStoreByAccount").setParameter("account", account);
+		try {
+			return (StoreVO) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	@Override
@@ -49,5 +73,5 @@ public class StoreDAOIm implements StoreDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

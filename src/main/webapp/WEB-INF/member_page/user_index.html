@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+  <link rel="icon" href="../images/logo.ico">
+  <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all" />
+  <title>基本資料</title>
+  <style>
+    form {
+      border: 1px solid blue;
+      margin: 20px 200px;
+      min-width: 247px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 757.98px) {
+      form {
+        vertical-align: middle;
+        margin: 20px 100px;
+      }
+    }
+
+    button {
+      display: inline;
+    }
+
+    input,
+    label {
+      display: inline;
+    }
+
+    span.-none {
+      display: none;
+    }
+
+    span {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- row1：header + nav -->
+  <div class="row1">
+    <header id="header" class="hoc clear">
+      <a href="./index.html">
+        <img class="logo" src="../images/logo_navy.png" alt="logo" />
+      </a>
+
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+          <li class="active">
+            <a class="drop" href="#">我要點餐</a>
+            <ul>
+              <li><a href="#">商家總覽</a></li>
+              <li><a href="#">搜尋點餐</a></li>
+              <li><a href="#">地圖點餐</a></li>
+            </ul>
+          </li>
+          <li class="active">
+            <a class="drop" href="#">訂單狀態</a>
+            <ul>
+              <li><a href="#">現在訂單</a></li>
+              <li><a href="#">歷史訂單</a></li>
+            </ul>
+          </li>
+          <li class="active"><a href="./wishlist.html">我的最愛</a></li>
+          <li class="active"><a href="#">會員中心</a></li>
+          <li class="active" id="li_login_signup">
+            <a class="drop" href="#" id="a_login_signup">登入/註冊</a>
+            <ul>
+              <li><a href="#">我是會員</a></li>
+              <li><a href="#">我是廠商</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#"><img class="cart" src="../images/cart.png" alt="購物車" /></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+
+  <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
+  <div class="d-flex justify-content-center align-content-center">
+    <button type="button" disabled>基本資料/更新</button>
+    <button type="button" onclick="location.href='./history_page.html'">歷史訂單紀錄</button>
+  </div>
+  <h2 class="d-flex justify-content-center align-content-center">基本資料/更新</h2>
+  <form action="#" method="#" id="form_member_info">
+
+    <p><label id="label_account">帳號：</label><input type="text" value="#" disabled id="input_account"><span
+        id="span_account_comment" style="font-size: 10px"> 帳號無法變更</span></p>
+    <p><label id="label_old_password">舊密碼：</label><input type="password" id="input_old_password"><span
+        id="span_old_password_comment" style="font-size: 10px" class="-none"> test</span></p>
+    <p><label id="label_password">新密碼：</label><input type="password" id="input_password"><span
+        id="span_password_comment" style="font-size: 10px" class="-none"> test</span></p>
+    <p><label id="label_password_check">確認新密碼：</label><input type="password" id="input_password_check"><span
+        id="span_password_check_comment" style="font-size: 10px" class="-none"> test</span></p>
+    <p><label id="label_name">姓名：</label><input type="text" value="#" id="input_name"><span id="span_name_comment"
+        style="font-size: 10px" class="-none"> 請與證件上之姓名相同，以免無法取餐！</span></p>
+    <p><label id="label_phone">電話：</label><input type="text" value="#" id="input_phone"><span id="span_phone_comment"
+        style="font-size: 10px" class="-none"> 請輸入手機號碼</span></p>
+    <button type="button" id="btn_reset">重填</button>
+    <button type="submit" id="btn_submit">確認修改</button>
+
+
+  </form>
+
+  <!-- row5：footer -->
+
+  <div class=" row5">
+    <footer id="footer" class="hoc clear">
+
+      <h3 class="heading">Order faster, bite easier</h3>
+      <div>
+        <div class="footer_div">
+          <h4>店家</h4>
+          <a href="">店家總覽</a><br />
+          <a href="">地圖搜尋</a><br />
+        </div>
+        <div class="footer_div">
+          <h4>會員</h4>
+          <a href="">會員中心</a><br />
+          <a href="">登入/註冊</a><br />
+          <a href="">我的最愛</a><br />
+          <a href="">我的購物車</a><br />
+
+        </div>
+        <div class="footer_div">
+          <h4>幫助</h4>
+          <a href="">聯絡我們</a><br />
+        </div>
+      </div>
+
+      <!-- copyright宣告  -->
+
+      <div id="copyright">
+        <p>
+          Copyright &copy; 2022 - All Rights Reserved -
+          <a href="#">Domain Name</a>
+        </p>
+        <p class="font-xs">
+          Template by
+          <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS
+            Templates</a>
+        </p>
+      </div>
+
+    </footer>
+  </div>
+
+  <script src="../vendors/jquery/jquery-3.6.0.min.js"></script>
+  <script>
+
+    let name;
+    let phone;
+    let password;
+
+    window.onload = () => {
+      if (sessionStorage.getItem("userId") != null) {
+
+        document.querySelector("#li_login_signup").innerHTML = `Hi, ${sessionStorage.getItem("userName")}`;
+        // document.querySelector("#a_login_signup").remove();
+      }
+
+      fetch("http://localhost:8080/fastero/users/" + sessionStorage.getItem("userId")).then(function (response) { // 接收到回傳的物件
+
+        if (response.ok) { // 如果正確取得資料，沒有發生錯誤
+          return response.json(); // 將取得的資料，再使用 .json() 解析資料
+        }
+        throw new Error(response.statusText);
+
+      }).then(function (data) { // 這裡真的取得資料：data
+
+        if (data.result == null) {
+          alert(data.message);
+        } else {
+          document.querySelector("#input_account").value = data.result.userAccount;
+          document.querySelector("#input_name").value = data.result.userName;
+          document.querySelector("#input_phone").value = data.result.userPhone;
+          name = data.result.userName;
+          phone = data.result.userPhone;
+          password = data.result.userPassword;
+        }
+
+      }).catch(function (error) { // 發生任何錯誤，就會執行 catch 裡的程式
+
+        console.log(error); // 這裡取得錯誤資訊：error
+
+      })
+
+
+    }
+
+    // 名稱檢查方法
+    function name_check() {
+      const REX = /^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$/;
+      if (REX.test($("#input_name").val())) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    // 電話檢查方法
+    function phone_check() {
+
+      const REX = /^(09)[0-9]{8}$/; //09開頭，數字共10碼
+
+      return REX.test($("#input_phone").val());
+    }
+    /*------------------------------按鈕------------------------------*/
+    // 按下重填按鈕，密碼欄位清空並輸入回初始姓名及電話
+    $("#btn_reset").on("click", function () {
+      $("#input_password").val("");
+      $("#input_password_check").val("");
+      $("#input_name").val(name);
+      $("#input_phone").val(phone);
+    });
+    // 按下送出按鈕
+    $("#btn_submit").on("click", function () {
+      // 密碼與確認密碼不一致，將兩密碼欄位清空
+      if ($("#input_old_password").val() != password) {
+        alert("舊密碼輸入錯誤！");
+        $("#input_old_password").val("");
+        $("#input_password").val("");
+        $("#input_password_check").val("");
+      } else if ($("#input_password").val() != $("#input_password_check").val()) {
+        alert("密碼不一致！");
+        $("#input_password").val("");
+        $("#input_password_check").val("");
+        // 姓名驗證未通過
+      } else if (!name_check()) {
+        alert("請輸入中文或英文姓名！Please enter your name in Chinese or English!")
+        // 電話驗證未通過
+      } else if (!phone_check()) {
+        alert("電話格式錯誤！")
+      } else {
+        // 有修改密碼
+        if($("#input_password").val() != ""){
+          password = $("#input_password").val();
+        }
+
+        let data = {
+          userId: sessionStorage.getItem("userId"),
+          userAccount: $("#input_account").val(),
+          userPassword: password,
+          userName: $("#input_name").val(),
+          userPhone: $("#input_phone").val(),
+
+        }
+
+        fetch("http://localhost:8080/fastero/users", {
+          headers: {
+                'content-type': 'application/json'
+            },
+          method: "PUT",
+          body: JSON.stringify(data) // 欲傳送的資料
+
+        }).then(function (response) { // 接收到回傳的物件
+
+          if (response.ok) { // 如果正確取得資料，沒有發生錯誤
+            return response.json(); // 將取得的資料，再使用 .json() 解析資料
+          }
+          throw new Error(response.statusText);
+
+        }).then(function (data) { // 這裡真的取得資料：data
+
+          if (data.result == null) {
+            alert(data.message);
+          } else {
+            alert("資料修改成功！")
+            $("#input_old_password").val("");
+            $("#input_password").val("");
+            $("#input_password_check").val("");
+          }
+
+        }).catch(function (error) { // 發生任何錯誤，就會執行 catch 裡的程式
+
+          console.log(error); // 這裡取得錯誤資訊：error
+
+        })
+      }
+    })
+    $("#btn_history").on("click", function () {
+
+
+    })
+    /*------------------------------按鈕------------------------------*/
+    /*------------------------------焦點------------------------------*/
+    // 當焦點離開舊密碼欄
+    $("#input_old_password").on("blur", function () {
+      // 未輸入舊密碼
+      if ($("#input_old_password").val() == "") {
+        document.querySelector("#span_old_password_comment").innerHTML = "請輸入舊密碼";
+        document.querySelector("#span_old_password_comment").removeAttribute("class");
+      }
+    })
+
+    // 當焦點離開姓名輸入欄
+    $("#input_name").on("blur", function () {
+      // 未輸入姓名
+      if ($("#input_name").val() == "") {
+        document.querySelector("#span_name_comment").innerHTML = "請輸入姓名";
+        document.querySelector("#span_name_comment").removeAttribute("class");
+        // 姓名驗證失敗
+      } else if (!name_check()) {
+
+        document.querySelector("#span_name_comment").innerHTML = "請輸入中文或英文姓名！Please enter your name in Chinese or English!";
+        document.querySelector("#span_name_comment").removeAttribute("class");
+        // 姓名驗證成功
+      } else {
+        console.log("姓名驗證成功");
+        document.querySelector("#span_name_comment").setAttribute("class", "-none");
+      }
+    })
+    // 當焦點離開電話輸入欄
+    $("#input_phone").on("blur", function () {
+      // 未輸入電話
+      if (!$("#input_phone").val()) {
+        document.querySelector("#span_phone_comment").removeAttribute("class");
+        // 電話驗證失敗
+      } else if (!phone_check()) {
+
+        document.querySelector("#span_phone_comment").innerHTML = "電話格式錯誤"
+        document.querySelector("#span_phone_comment").removeAttribute("class");
+        // 電話驗證成功
+      } else {
+        console.log("電話驗證成功");
+        document.querySelector("#span_phone_comment").setAttribute("class", " -none");
+      }
+    })
+    /*------------------------------焦點------------------------------*/
+  </script>
+</body>
+
+</html>

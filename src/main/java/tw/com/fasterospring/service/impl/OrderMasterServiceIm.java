@@ -56,8 +56,25 @@ public class OrderMasterServiceIm implements OrderMasterService {
 
 	@Override
 	public Result getByStoreId(Integer storeId) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return R.success(DAO.getByStoreId(storeId));
+		} catch (Exception e) {
+			return R.fail(e.toString());
+		}
+	}
+	@Override
+	public Result getByStoreId(Integer storeId, Integer orderId) {
+		
+		try {
+			OrderMasterVOForHistory vo = DAO.getById(orderId);
+			if(vo == null || vo.getStoreId() != storeId) {
+				return R.fail("查無此筆訂單");
+			}
+			
+			return R.success(vo);
+		} catch (Exception e) {
+			return R.fail(e.toString());
+		}
 	}
 
 	@Override

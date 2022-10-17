@@ -20,7 +20,7 @@ import tw.com.fasterospring.service.intf.UserService;
 import tw.com.fasterospring.vo.UserVO;
 
 
-@WebServlet("/users")
+@WebServlet("/users/*")
 public class UserControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,8 +33,26 @@ public class UserControllerServlet extends HttpServlet {
 		    .create();
 	
 	@Autowired UserService service;
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		System.out.println("UCS: doGet...");
+		
+		// CROS
+		setHeaders(response);
+		String pathInfo = request.getPathInfo();
+		
+		if(pathInfo != null) {
+			response.getWriter().print(_gson.toJson(service.getById(Integer.parseInt(pathInfo.split("/")[1]))));
+		}
+		
+	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 		setHeaders(response);
 		PrintWriter out = response.getWriter();
 		
@@ -42,13 +60,22 @@ public class UserControllerServlet extends HttpServlet {
 		out.print(_gson.toJson(service.register(vo)));
 	}
 
+	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setHeaders(response);
+		
+		System.out.println("UCS: doPut...");
+		
 		PrintWriter out = response.getWriter();
 		
 		UserVO vo = _gson.fromJson(request.getReader().readLine(), UserVO.class);
 		
 		out.print(_gson.toJson(service.update(vo)));
+	}
+	
+	@Override
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		setHeaders(response);
 	}
 	
 	/*

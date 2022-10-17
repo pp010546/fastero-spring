@@ -57,10 +57,10 @@ public class OrderMasterDAOIm implements OrderMasterDAO{
 		return this.getSession().getNamedQuery("selectByUserId").setParameter("userId", userId).getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderMasterVOForHistory> getByStoreId(Integer storeId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getSession().getNamedQuery("selectByStoreId").setParameter("storeId", storeId).getResultList();
 	}
 
 }
