@@ -42,8 +42,13 @@ public class StoreDAOIm implements StoreDAO {
 
 	@Override
 	public Integer insert(StoreVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			this.getSession().save(vo);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override

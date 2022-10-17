@@ -27,7 +27,7 @@
     <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
 
     <h2 class="d-flex justify-content-center align-content-center">商家登入</h2>
-    <form action="http://192.168.18.4:8080/fastero/users" method="post" id="form_member_info">
+    <form action="#" method="post" id="form_member_info">
 
         <p><label id="label_account">帳號：</label><input type="text" id="input_account"></p>
         <p><label id="label_password">密碼：</label><input type="password" id="input_password"></p>
@@ -70,6 +70,7 @@
             }else{
                 alert("登入成功!");
                 sessionStorage.setItem('storeId', data.result.storeId);
+                sessionStorage.setItem('storeName', data.result.storeName);
                 window.location.href = "./store_history.html";
             }
 

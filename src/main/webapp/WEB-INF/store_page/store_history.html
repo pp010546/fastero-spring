@@ -8,20 +8,70 @@
     <title>歷史訂單</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <link rel="icon" href="../images/logo.ico">
+    <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all" />
     <style>
         form {
-            border: 1px solid blue;
+            /* border: 1px solid blue; */
             margin: 20px;
         }
 
-        table.table {
+        /* table.table {
             border: 1px solid red;
+        } */
+
+        button {
+            display: inline;
+        }
+
+        input,
+        label {
+            display: inline;
         }
     </style>
 </head>
 
 <body>
+    <!-- row1：header + nav -->
+    <div class="row1">
+        <header id="header" class="hoc clear">
+            <a href="./index.html">
+                <img class="logo" src="../images/logo_navy.png" alt="logo" />
+            </a>
 
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li class="active">
+                        <a class="drop" href="#">我要點餐</a>
+                        <ul>
+                            <li><a href="#">商家總覽</a></li>
+                            <li><a href="#">搜尋點餐</a></li>
+                            <li><a href="#">地圖點餐</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a class="drop" href="#">訂單狀態</a>
+                        <ul>
+                            <li><a href="#">現在訂單</a></li>
+                            <li><a href="#">歷史訂單</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href="./wishlist.html">我的最愛</a></li>
+                    <li class="active"><a href="./user_index.html">會員中心</a></li>
+                    <li class="active" id="li_login_signup">
+                        <a class="drop" href="#" id="a_login_signup">登入/註冊</a>
+                        <ul>
+                            <li><a href="./user_login.html">我是會員</a></li>
+                            <li><a href="#">我是廠商</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><img class="cart" src="../images/cart.png" alt="購物車" /></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
     <header></header>
     <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
     <div class="d-flex justify-content-center align-content-center">
@@ -72,6 +122,49 @@
         </table>
     </form>
 
+    <!-- row5：footer -->
+
+    <div class=" row5">
+        <footer id="footer" class="hoc clear">
+
+            <h3 class="heading">Order faster, bite easier</h3>
+            <div>
+                <div class="footer_div">
+                    <h4>店家</h4>
+                    <a href="">店家總覽</a><br />
+                    <a href="">地圖搜尋</a><br />
+                </div>
+                <div class="footer_div">
+                    <h4>會員</h4>
+                    <a href="">會員中心</a><br />
+                    <a href="">登入/註冊</a><br />
+                    <a href="">我的最愛</a><br />
+                    <a href="">我的購物車</a><br />
+
+                </div>
+                <div class="footer_div">
+                    <h4>幫助</h4>
+                    <a href="">聯絡我們</a><br />
+                </div>
+            </div>
+
+            <!-- copyright宣告  -->
+
+            <div id="copyright">
+                <p>
+                    Copyright &copy; 2022 - All Rights Reserved -
+                    <a href="#">Domain Name</a>
+                </p>
+                <p class="font-xs">
+                    Template by
+                    <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS
+                        Templates</a>
+                </p>
+            </div>
+
+        </footer>
+    </div>
+
 
     <script>
         // "orderId": 1,
@@ -82,17 +175,24 @@
 
         const btn = document.querySelector("#btn_submit_query");
         const input = document.querySelector("#input_query_order");
+        
+        let firstLoad = true;
 
         //當頁面載入時，以session內的storeId去get所有訂單
-        window.onload = () =>{
+        window.onload = () => {
+            if (sessionStorage.getItem("storeId") != null) {
+
+                document.querySelector("#li_login_signup").innerHTML = `Hi, ${sessionStorage.getItem("storeName")}`;
+                // document.querySelector("#a_login_signup").remove();
+            }
             get("/" + sessionStorage.getItem('storeId'));
         }
 
         //以訂單編號搜尋
-        btn.onclick = () =>{
+        btn.onclick = () => {
             let value = input.value;
-            
-            if(value != ""){
+
+            if (value != "") {
                 get("/" + sessionStorage.getItem("storeId") + "/" + value);
                 return;
             }
@@ -100,20 +200,24 @@
 
         }
 
-            
-            async function get(id) {
+
+        async function get(id) {
             await fetch(baseUrl + id)
                 .then((res) => res.json())
                 .then((data) => {
-                    if(data.result == null){
+                    if (data.result.length == 0) {
+                        if(firstLoad){
+                            window.location.href = "../common/order_blank.html";
+                            return;
+                        }
                         alert("此訂單編號不存在!");
                         return;
-                    }else{
-                        if (data.result.length == undefined){
+                    } else {
+                        if (data.result.length == undefined) {
                             let e = data.result;
                             document.querySelector("#order").innerHTML =
-                            orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.storeName, e.orderStatus);
-                        }else{
+                                orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.storeName, e.orderStatus);
+                        } else {
                             document.querySelector("#order").innerHTML =
                                 data.result.map((e) => orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.orderStatus)).join("");
                         };
@@ -124,9 +228,11 @@
         //先以訂單編號查詢，如果之後有餘力再以訂單關鍵字
         function orderTamplate(orderId, orderTime, orderAmount, orderStatus) {
 
-        return `<tr>
+            firstLoad = false;
+
+            return `<tr>
             <td>${orderId}</td>
-            <td>${orderTime.split("T")[0] + orderTime.split("T")[1].substring(0,5)}</td>
+            <td>${orderTime.split("T")[0] +"\t"+ orderTime.split("T")[1].substring(0, 5)}</td>
             <td>${orderAmount}</td>
             <td><a href="#">查看</td>
             <td><a href="#">${orderStatus}</td>
