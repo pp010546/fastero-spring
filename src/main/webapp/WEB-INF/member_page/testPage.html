@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const useQuery = () => {
+  const baseUrl = 'http://localhost:8080/fastero';
+
+  const api = {
+    users: '/users',
+    details: '/details',
+  };
+
+  const onAjax = async (method, url, body) => {
+    let resp = null;
+    try {
+      method,
+        await fetch(baseUrl + url, {
+          method,
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            resp = data;
+          });
+    } catch (error) {}
+    return resp;
+  };
+
+  const get = async (url, data) => {
+    return await onAjax('GET', url);
+  };
+
+  const post = async (url, data) => {
+    return await onAjax('POST', url, JSON.stringify(data));
+  };
+  return { get, post, api };
+};
+    </script>
+</body>
+</html>

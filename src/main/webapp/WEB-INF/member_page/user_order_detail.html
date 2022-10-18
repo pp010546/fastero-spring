@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂單詳情</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <style>
+        form {
+            border: 1px solid blue;
+            margin: 20px;
+        }
+
+        table.table {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
+    <div class="d-flex justify-content-center align-content-center">
+        <button type="button" onclick="location.href='./user_history.html'">回到所有訂單</button>
+    </div>
+    <h2 class="d-flex justify-content-center align-content-center">訂單詳情</h2>
+
+    <table class="table" id="table_order">
+        <thead>
+            <tr>
+                <th>餐點名稱</th>
+                <th>單價</th>
+                <th>數量</th>
+                <th>小計</th>
+            </tr>
+        </thead>
+        <tbody id="order_detail">
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td>總金額</td>
+                <td id="total"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script>
+
+        const baseUrl = "http://localhost:8080/fastero/details";
+
+        const btn = document.querySelector("#btn_submit_query");
+        const input = document.querySelector("#input_query_order");
+
+        let userId = sessionStorage.getItem("userId");
+        let orderId = sessionStorage.getItem("orderId");
+        let total = 0;
+
+        window.onload = () => {
+
+            //當頁面載入時，以session內的userId去get所有訂單 
+            get("/" + orderId);
+
+        }
+
+        async function get(id) {
+            await fetch(baseUrl + id)
+                .then((res) => res.json())
+                .then((data) => {
+
+                    let e = data.result;
+                    console.log(e);
+                    document.querySelector("#order_detail").innerHTML =
+                        data.result.map((e) => orderTamplate(e.product.productName, e.price, e.quantity)).join("");
+
+                    
+
+                })
+        }
+
+        function orderTamplate(productName, price, quantity) {
+
+            total += price * quantity;
+            console.log(total);
+            document.querySelector("#total").innerHTML = total;
+
+            return `<tr>
+                <td>${productName}</td>
+                <td>${price}</td>
+                <td>${quantity}</td>
+                <td class="sub_total">${price * quantity}</td>
+            </tr>`
+
+            
+        }
+
+        
+
+
+
+    </script>
+
+</body>
+
+</html>
