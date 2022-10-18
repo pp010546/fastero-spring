@@ -17,43 +17,28 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import tw.com.fasterospring.common.LocalDateTimeAdapter;
-import tw.com.fasterospring.service.intf.OrderMasterService;
+import tw.com.fasterospring.service.intf.OrderDetailService;
 
-@WebServlet("/orders/user/*")
-public class UserOrderControllerServlet extends HttpServlet {
+@WebServlet("/details/*")
+public class OrderDetailControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Gson _gson = new GsonBuilder()
-					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-					.enableComplexMapKeySerialization()
-					.serializeNulls()
-					.setDateFormat(DateFormat.DATE_FIELD)
-					.setPrettyPrinting()
-					.setVersion(1.0)
-					.create();
-	@Autowired OrderMasterService service;
-	
-       
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	Gson _gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+			.enableComplexMapKeySerialization().serializeNulls().setDateFormat(DateFormat.DATE_FIELD)
+			.setPrettyPrinting().setVersion(1.0).create();
+	@Autowired
+	OrderDetailService service;
 
-		// CROS
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		setHeaders(response);
 		
-		System.out.println("UOCS: doGet...");
-
 		String pathInfo = request.getPathInfo();
 		PrintWriter out = response.getWriter();
 		
-		if (pathInfo.split("/").length<=2) {
-			Integer userId = Integer.parseInt(pathInfo.split("/")[1]);
-			out.print(_gson.toJson(service.getByUserId(userId)));
-			return;
-		}else {
-			Integer userId = Integer.parseInt(pathInfo.split("/")[1]);
-			Integer orderId = Integer.parseInt(pathInfo.split("/")[2]);
-			
-			out.print(_gson.toJson(service.getByUserId(userId, orderId)));
-		}
+		Integer orderId = Integer.parseInt(pathInfo.split("/")[1]);
+		out.print(_gson.toJson(service.getByOrderId(orderId)));
+		return;
 	}
 	
 	@Override

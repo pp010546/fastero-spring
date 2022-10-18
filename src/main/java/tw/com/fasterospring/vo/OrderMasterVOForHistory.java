@@ -23,7 +23,6 @@ import lombok.Data;
 
 @Entity
 @Table(name = "OrderMaster")
-//@SecondaryTable(name = "Store", pkJoinColumns = @PrimaryKeyJoinColumn(name="store_id"))
 @Data
 @Component
 @NamedQueries({

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +19,7 @@
         }
     </style>
 </head>
+
 <body>
     <header></header>
     <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
@@ -26,33 +28,82 @@
     </div>
     <h2 class="d-flex justify-content-center align-content-center">訂單詳情</h2>
 
-        <table class="table" id="table_order">
-            <thead>
-                <tr>
-                    <th>餐點名稱</th>
-                    <th>單價</th>
-                    <th>數量</th>
-                </tr>
-            </thead>
-            <tbody id="order_detail">
-                <!-- <tr>
-                    <td>111</td>
-                    <td>2022-07-08</td>
-                    <td>$100</td>
-                    <td><a href="#">查看</a></td>
-                    <td>八方雲集</td>
-                    <td><a href="#">已評論</a></td>
-                </tr>
-                <tr>
-                    <td>88</td>
-                    <td>2022-06-20</td>
-                    <td>$300</td>
-                    <td><a href="#">查看</a></td>
-                    <td>我家牛排</td>
-                    <td><a href="#">尚未評論</a></td>
-                </tr> -->
-            </tbody>
-        </table>
+    <table class="table" id="table_order">
+        <thead>
+            <tr>
+                <th>餐點名稱</th>
+                <th>單價</th>
+                <th>數量</th>
+                <th>小計</th>
+            </tr>
+        </thead>
+        <tbody id="order_detail">
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td>總金額</td>
+                <td id="total"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script>
+
+        const baseUrl = "http://localhost:8080/fastero/details";
+
+        const btn = document.querySelector("#btn_submit_query");
+        const input = document.querySelector("#input_query_order");
+
+        let userId = sessionStorage.getItem("userId");
+        let orderId = sessionStorage.getItem("orderId");
+        let total = 0;
+
+        window.onload = () => {
+
+            //當頁面載入時，以session內的userId去get所有訂單 
+            get("/" + orderId);
+
+        }
+
+        async function get(id) {
+            await fetch(baseUrl + id)
+                .then((res) => res.json())
+                .then((data) => {
+
+                    let e = data.result;
+                    console.log(e);
+                    document.querySelector("#order_detail").innerHTML =
+                        data.result.map((e) => orderTamplate(e.product.productName, e.price, e.quantity)).join("");
+
+                    
+
+                })
+        }
+
+        function orderTamplate(productName, price, quantity) {
+
+            total += price * quantity;
+            console.log(total);
+            document.querySelector("#total").innerHTML = total;
+
+            return `<tr>
+                <td>${productName}</td>
+                <td>${price}</td>
+                <td>${quantity}</td>
+                <td class="sub_total">${price * quantity}</td>
+            </tr>`
+
+            
+        }
+
         
+
+
+
+    </script>
+
 </body>
+
 </html>

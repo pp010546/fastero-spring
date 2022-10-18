@@ -80,7 +80,7 @@
         <button type="button" disabled>歷史訂單紀錄</button>
     </div>
     <h2 class="d-flex justify-content-center align-content-center">歷史訂單紀錄</h2>
-    <form action="http://192.168.18.4:8080/fastero/details" method="get">
+    <form action="http://localhost:8080/fastero/details" method="get">
         <span class="d-flex justify-content-center align-content-center">
             <button type="button" id="btn_recent_order">最近訂單</button>
             <input type="text" id="input_query_order" name="order_id" placeholder="訂單編號">
@@ -149,12 +149,9 @@
         </footer>
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script>
-        // "orderId": 1,
-        // "productId": 6,
-        // "price": 180,
-        // "quantity": 1
+ 
         const baseUrl = "http://localhost:8080/fastero/orders/user";
 
         const btn = document.querySelector("#btn_submit_query");
@@ -240,17 +237,23 @@
             firstLoad = false;
 
             return `<tr>
-            <td>${orderId}</td>
+            <td class="order_id">${orderId}</td>
             <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0,5)}</td>
             <td>${orderAmount}</td>
-            <td><a href="#">查看</td>
+            <td><button type="button" class="btn_detail">查看</button></td>
             <td>${storeName}</td>
             <td><a href="#">${orderStatus}</td>
         </tr>`
         }
 
+        //訂單詳情按鈕
+        $(document).on("click", ".btn_detail", function(){
 
+            let orderId = $("td.order_id").html();
 
+            sessionStorage.setItem('orderId', orderId)
+            window.location.href = "./user_order_detail.html";
+        }) 
     </script>
 
 </body>
