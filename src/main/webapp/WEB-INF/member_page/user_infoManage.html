@@ -278,6 +278,8 @@
             $("#input_old_password").val("");
             $("#input_password").val("");
             $("#input_password_check").val("");
+            document.querySelector("#li_login_signup").innerHTML = `Hi, ${$("#input_name").val()}`;
+            sessionStorage.setItem('userName', $("#input_name").val());
           }
 
         }).catch(function (error) { // 發生任何錯誤，就會執行 catch 裡的程式

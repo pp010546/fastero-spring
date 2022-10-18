@@ -69,7 +69,7 @@
             userPhone: phone.value
         }
 
-        fetch("http://192.168.18.4:8080/fastero/users", {
+        fetch("http://localhost:8080/fastero/users", {
             // headers: {
             //     'content-type': 'application/json'
             // },
@@ -89,7 +89,8 @@
                 alert(data.message);
             }else{
                 alert("註冊成功!");
-                window.location.href = "./user_history.html";
+                
+                window.location.href = "../index.html";
             }
 
         }).catch(function (error) { // 發生任何錯誤，就會執行 catch 裡的程式
