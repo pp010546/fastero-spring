@@ -8,13 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -49,8 +45,6 @@ public class OrderMasterVOForHistory {
 	private LocalDateTime updateTime;
 	@Column(name = "order_remark")
 	private String orderRemark;
-//	@Column(table = "Store", name = "store_name")
-//	private String storeName;
 	@ManyToOne
 	@JoinColumn(name = "store_id", insertable = false, updatable = false)
 	private StoreVO store;
