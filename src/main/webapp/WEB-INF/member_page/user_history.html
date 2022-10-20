@@ -28,10 +28,12 @@
         label {
             display: inline;
         }
-        h1{
+
+        h1 {
             font-size: 30px;
         }
-        h2{
+
+        h2 {
             font-size: 20px;
         }
     </style>
@@ -65,11 +67,11 @@
                     </li>
                     <li class="active"><a href="./wishlist.html">我的最愛</a></li>
                     <li class="active">
-                        <a class="drop" href="./user_infoManage.html">會員中心</a>
+                        <a class="drop" href="./user_infoManage.html" id="a_user_index">會員中心</a>
                         <ul>
-                            <li><a href="#">歷史訂單</a></li>
-                            <li><a href="#">修改資料</a></li>
-                            <li><a href="#" id="logout">登出</a></li>
+                            <li><a href="./user_history.html" id="a_history">歷史訂單</a></li>
+                            <li><a href="./user_infoManage.html" id="a_info">修改資料</a></li>
+                            <li id="li_logout"><a href="#" id="a_logout">登出</a></li>
                         </ul>
                     </li>
                     <li class="active" id="li_login_signup">
@@ -92,7 +94,9 @@
         <button type="button" onclick="location.href='./user_infoManage.html'">基本資料/更新</button>
         <button type="button" disabled>歷史訂單紀錄</button>
     </div> -->
-    <a href="http://127.0.0.1:5500/member_page/user_history.html"><h2 class="d-flex justify-content-center align-content-center">歷史訂單紀錄</h2></a>
+    <a href="http://127.0.0.1:5500/member_page/user_history.html">
+        <h2 class="d-flex justify-content-center align-content-center">歷史訂單紀錄</h2>
+    </a>
     <form action="http://localhost:8080/fastero/details" method="get">
         <span class="d-flex justify-content-center align-content-center">
             <input type="text" id="input_query_order" name="order_id" placeholder="訂單編號">
@@ -161,26 +165,34 @@
         </footer>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script>
- 
+
         const baseUrl = "http://localhost:8080/fastero/orders/user";
 
         const btn = document.querySelector("#btn_submit_query");
         const input = document.querySelector("#input_query_order");
+
+        // 初次載入此頁面
         let firstLoad = true;
 
         window.onload = () => {
-            
+
             //當頁面載入時，以session內的userId去get所有訂單 
             get("/" + sessionStorage.getItem('userId'));
             // 如果有登入，要將上面的「登入/註冊」改為招呼語
-            if(sessionStorage.getItem("userId") != null){
-                
-                 document.querySelector("#li_login_signup").innerHTML = `Hi, ${sessionStorage.getItem("userName")}`;
+            if (sessionStorage.getItem("userId") != null) {
+
+                document.querySelector("#li_login_signup").innerHTML = `Hi, ${sessionStorage.getItem("userName")}`;
                 // document.querySelector("#a_login_signup").remove();
+                // 未登入時
+            } else {
+
+                confirm("尚未登入！是否要登入？取消則回到首頁")? window.location.href = "./user_login.html" : window.location.href = "../common/index.html";
+                
             }
-            
+
         }
 
         //以訂單編號搜尋
@@ -202,20 +214,22 @@
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(firstLoad);
-                    
-                    if (data.result.length == 0) {
-                        if(firstLoad){
+                    console.log(data.result)
+
+                    // 若初次載入時就沒有任何資料，則跳轉到空頁面
+                    if (firstLoad && data.result.length == 0) {
                             window.location.href = "../common/order_blank.html";
                             return;
                         }
+                    if (data.result == null) {
                         alert("此訂單編號不存在!");
                         return;
                     } else {
-                        if (data.result.length == undefined){
+                        if (data.result.length == undefined) {
                             let e = data.result;
                             document.querySelector("#order").innerHTML =
-                            orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.storeName, e.orderStatus);
-                        }else{
+                                orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.store.storeName, e.orderStatus);
+                        } else {
                             document.querySelector("#order").innerHTML =
                                 data.result.map((e) => orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.store.storeName, e.orderStatus)).join("");
                         };
@@ -224,48 +238,58 @@
         }
 
         function orderTamplate(orderId, orderTime, orderAmount, storeName, orderStatus) {
-            
-            if(orderStatus < 2){
+
+            if (orderStatus < 2) {
                 return;
-            }else
-            
-            switch (orderStatus) {
-                // case 0:
-                //     orderStatus = "備餐中"
-                //     break;
-                // case 1:
-                //     orderStatus = "尚未取餐"
-                //     break;
-                case 2:
-                    orderStatus = "留下你的評論吧>w<"
-                    break;
-                case 3:
-                    orderStatus = "已評論。"
-                    break;
-                default:
-                    break;
-            }
+            } else
+
+                switch (orderStatus) {
+                    // case 0:
+                    //     orderStatus = "備餐中"
+                    //     break;
+                    // case 1:
+                    //     orderStatus = "尚未取餐"
+                    //     break;
+                    case 2:
+                        orderStatus = "留下你的評論吧>w<"
+                        break;
+                    case 3:
+                        orderStatus = "已評論"
+                        break;
+                    default:
+                        break;
+                }
 
             firstLoad = false;
 
             return `<tr>
             <td class="order_id">${orderId}</td>
-            <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0,5)}</td>
+            <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0, 5)}</td>
             <td>${orderAmount}</td>
             <td><a href="#" class="a_detail">查看</a></td>
             <td>${storeName}</td>
             <td><a href="#">${orderStatus}</td>
         </tr>`
         }
-// <td><button type="button" class="btn_detail">查看</button></td>
-        //訂單詳情按鈕
-        $(document).on("click", ".a_detail", function(){
+        // <td><button type="button" class="btn_detail">查看</button></td>
+        //訂單詳情連結
+        $(document).on("click", ".a_detail", function () {
 
             let orderId = $("td.order_id").html();
 
             sessionStorage.setItem('orderId', orderId)
             window.location.href = "./user_order_detail.html";
-        }) 
+        })
+
+        // 登出連結
+        $(document).on("click", "#a_logout", function(){
+
+            sessionStorage.clear();
+            window.location.href = "../common/index.html";
+
+        })
+
+
     </script>
 
 </body>

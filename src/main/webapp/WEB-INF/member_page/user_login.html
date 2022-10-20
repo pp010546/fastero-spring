@@ -30,10 +30,12 @@
         label {
             display: inline;
         }
-        p{
+
+        p {
             padding: auto;
         }
-        a #login_signup .-none{
+
+        a #login_signup .-none {
             display: none;
         }
     </style>
@@ -61,11 +63,17 @@
                         <a class="drop" href="#">訂單狀態</a>
                         <ul>
                             <li><a href="#">現在訂單</a></li>
-                            <li><a href="#">歷史訂單</a></li>
+                            <li><a href="./user_infoManage.html">歷史訂單</a></li>
                         </ul>
                     </li>
                     <li class="active"><a href="./wishlist.html">我的最愛</a></li>
-                    <li class="active"><a href="#">會員中心</a></li>
+                    <li class="active">
+                        <a class="drop" href="./user_infoManage.html" id="a_user_index">會員中心</a>
+                        <ul>
+                            <li><a href="./user_history.html" id="a_history">歷史訂單</a></li>
+                            <li><a href="./user_infoManage.html" id="a_info">修改資料</a></li>
+                        </ul>
+                    </li>
                     <li class="active">
                         <a class="drop" href="#" id="login_signup">登入/註冊</a>
                         <ul>
@@ -84,14 +92,19 @@
     <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
 
     <h2 class="d-flex justify-content-center align-content-center">會員登入</h2>
-    <form action="http://192.168.18.4:8080/fastero/login/users" method="post" id="form_member_info">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <form action="http://192.168.18.4:8080/fastero/login/users" method="post" id="form_member_info">
 
-        <p><label id="label_account">帳號：</label><input type="text" id="input_account"></p>
-        <p><label id="label_password">密碼：</label><input type="password" id="input_password"></p>
-
-        <button type="reset" id="btn_reset">重填</button>
-        <button type="button" id="btn_submit">登入</button>
-    </form>
+                <p><label id="label_account">帳號：</label><input type="text" id="input_account"></p>
+                <p><label id="label_password">密碼：</label><input type="password" id="input_password"></p>
+        
+                <button type="reset" id="btn_reset">重填</button>
+                <button type="button" id="btn_submit">登入</button>
+            </form>
+        </div>
+    </div>
+    
 
     <!-- row5：footer -->
 
@@ -144,9 +157,14 @@
     let btn = document.querySelector("#btn_submit");
 
     window.onload = () => {
-        if(sessionStorage.getItem("userId") != null){
-            
-            window.location.href = "./history_page.html"
+        if (sessionStorage.getItem("userId") != null) {
+
+            window.location.href = "./user_history.html"
+        } else {
+            // 上方導覽列會員相關功能皆轉到會員登入頁面
+            document.querySelector("#a_history").setAttribute("href", "./user_login.html");
+            document.querySelector("#a_info").setAttribute("href", "./user_login.html");
+            document.querySelector("#a_user_index").setAttribute("href", "./user_login.html");
         }
     }
 
@@ -191,7 +209,7 @@
         })
     }
 
-    
+
 
 
 

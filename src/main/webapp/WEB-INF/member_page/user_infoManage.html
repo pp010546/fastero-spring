@@ -70,7 +70,13 @@
             </ul>
           </li>
           <li class="active"><a href="./wishlist.html">我的最愛</a></li>
-          <li class="active"><a href="#">會員中心</a></li>
+          <li class="active"><a class="drop" href="./user_infoManage.html" id="a_user_index">會員中心</a>
+            <ul>
+              <li><a href="./user_history.html" id="a_history">歷史訂單</a></li>
+              <li><a href="./user_infoManage.html" id="a_info">修改資料</a></li>
+              <li id="li_logout"><a href="#" id="logout">登出</a></li>
+            </ul>
+          </li>
           <li class="active" id="li_login_signup">
             <a class="drop" href="#" id="a_login_signup">登入/註冊</a>
             <ul>
@@ -167,6 +173,9 @@
 
         document.querySelector("#li_login_signup").innerHTML = `Hi, ${sessionStorage.getItem("userName")}`;
         // document.querySelector("#a_login_signup").remove();
+      } else {
+        // 未登入狀態
+        confirm("尚未登入！是否要登入？取消則回到首頁") ? window.location.href = "./user_login.html" : window.location.href = "../common/index.html";
       }
 
       fetch("http://localhost:8080/fastero/users/" + sessionStorage.getItem("userId")).then(function (response) { // 接收到回傳的物件
@@ -242,7 +251,7 @@
         alert("電話格式錯誤！")
       } else {
         // 有修改密碼
-        if($("#input_password").val() != ""){
+        if ($("#input_password").val() != "") {
           password = $("#input_password").val();
         }
 
@@ -257,8 +266,8 @@
 
         fetch("http://localhost:8080/fastero/users", {
           headers: {
-                'content-type': 'application/json'
-            },
+            'content-type': 'application/json'
+          },
           method: "PUT",
           body: JSON.stringify(data) // 欲傳送的資料
 
@@ -338,6 +347,13 @@
       }
     })
     /*------------------------------焦點------------------------------*/
+    // 登出連結
+    $(document).on("click", "#a_logout", function () {
+
+      sessionStorage.clear();
+      window.location.href = "../common/index.html";
+
+    })
   </script>
 </body>
 
