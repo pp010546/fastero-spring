@@ -189,8 +189,8 @@
                 // 未登入時
             } else {
 
-                confirm("尚未登入！是否要登入？取消則回到首頁")? window.location.href = "./user_login.html" : window.location.href = "../common/index.html";
-                
+                confirm("尚未登入！是否要登入？取消則回到首頁") ? window.location.href = "./user_login.html" : window.location.href = "../common/index.html";
+
             }
 
         }
@@ -198,8 +198,8 @@
 
         btn_search.onclick = () => {
             let value = input_search.value;
-            
-            if (value != "" ) {
+
+            if (value != "") {
                 get("/" + sessionStorage.getItem("userId") + "/" + value);
                 return;
             }
@@ -214,16 +214,16 @@
                 .then((data) => {
                     console.log(firstLoad);
                     console.log(data.result)
-                    
+
                     // 若初次載入時就沒有任何資料，則跳轉到空頁面
                     if (firstLoad && data.result.length == 0) {
-                            window.location.href = "../common/order_blank.html";
-                            return;
-                        }
+                        window.location.href = "../common/order_blank.html";
+                        return;
+                    }
 
-                    if(data.code != 200){
+                    if (data.code != 200) {
                         alert(data.message);
-                    }else{
+                    } else {
                         if (data.result.length == undefined) {
                             let e = data.result;
                             document.querySelector("#order").innerHTML =
@@ -251,9 +251,25 @@
                     //     break;
                     case 2:
                         orderStatus = "留下你的評論吧>w<"
+                        return `<tr>
+            <td class="order_id">${orderId}</td>
+            <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0, 5)}</td>
+            <td>${orderAmount}</td>
+            <td><a href="#" class="a_detail">查看</a></td>
+            <td>${storeName}</td>
+            <td><a href="#" class="a_comment">${orderStatus}</td>
+        </tr>`
                         break;
                     case 3:
                         orderStatus = "已評論"
+                        return `<tr>
+            <td class="order_id">${orderId}</td>
+            <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0, 5)}</td>
+            <td>${orderAmount}</td>
+            <td><a href="#" class="a_detail">查看</a></td>
+            <td>${storeName}</td>
+            <td><a href="店家頁面">${orderStatus}</td>
+        </tr>`
                         break;
                     default:
                         break;
@@ -261,14 +277,14 @@
 
             firstLoad = false;
 
-            return `<tr>
-            <td class="order_id">${orderId}</td>
-            <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0, 5)}</td>
-            <td>${orderAmount}</td>
-            <td><a href="#" class="a_detail">查看</a></td>
-            <td>${storeName}</td>
-            <td><a href="#">${orderStatus}</td>
-        </tr>`
+            //     return `<tr>
+            //     <td class="order_id">${orderId}</td>
+            //     <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0, 5)}</td>
+            //     <td>${orderAmount}</td>
+            //     <td><a href="#" class="a_detail">查看</a></td>
+            //     <td>${storeName}</td>
+            //     <td><a href="#">${orderStatus}</td>
+            // </tr>`
         }
         // <td><button type="button" class="btn_detail">查看</button></td>
         //訂單詳情連結
@@ -281,11 +297,17 @@
         })
 
         // 登出連結
-        $(document).on("click", "#a_logout", function(){
+        $(document).on("click", "#a_logout", function () {
 
             sessionStorage.clear();
             window.location.href = "../common/index.html";
 
+        })
+
+        // 留評論連結
+        $(document).on("click", ".a_comment", function () {
+
+            console.log("ttt");
         })
 
 

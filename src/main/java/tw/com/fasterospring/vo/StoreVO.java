@@ -59,7 +59,7 @@ public class StoreVO {
 	@Column(name = "store_open_status")
 	private Boolean storeOpenStatus;
 	@Column(name = "store_account_status")
-	private Byte storeAccountStatus;
+	private Integer storeAccountStatus;
 	@Column(name = "store_admin_name")
 	private String storeAdminName;
 	@Column(name = "store_admin_id")

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ import lombok.Data;
 @Component
 @NamedQueries({
 	@NamedQuery(name = "selectByUserId", query = "FROM OrderMasterVOForHistory WHERE userId = :userId ORDER BY orderTime DESC"),
-	@NamedQuery(name = "selectByStoreId", query = "FROM OrderMasterVOForHistory WHERE storeId = :storeId"),
+	@NamedQuery(name = "selectByStoreId", query = "FROM OrderMasterVOForHistory WHERE storeId = :storeId ORDER BY orderTime DESC"),
 	@NamedQuery(name = "selectByStoreName", query = "FROM OrderMasterVOForHistory WHERE store.storeName LIKE :storeName")
 })
 public class OrderMasterVOForHistory {
@@ -37,7 +38,7 @@ public class OrderMasterVOForHistory {
 	@Column(name = "store_id")
 	private Integer storeId;
 	@Column(name = "order_status")
-	private Byte orderStatus;
+	private Integer orderStatus;
 	@Column(name = "order_amount")
 	private Integer orderAmount;
 	@Column(name = "order_time")
@@ -46,8 +47,10 @@ public class OrderMasterVOForHistory {
 	private LocalDateTime updateTime;
 	@Column(name = "order_remark")
 	private String orderRemark;
+	
 	@ManyToOne
 	@JoinColumn(name = "store_id", insertable = false, updatable = false)
 	private StoreVO store;
+	
 
 }
