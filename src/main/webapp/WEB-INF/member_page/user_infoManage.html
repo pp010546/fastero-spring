@@ -93,30 +93,31 @@
   </div>
 
   <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
-  <div class="d-flex justify-content-center align-content-center">
-    <button type="button" disabled>基本資料/更新</button>
-    <button type="button" onclick="location.href='./user_history.html'">歷史訂單紀錄</button>
-  </div>
+
   <h2 class="d-flex justify-content-center align-content-center">基本資料/更新</h2>
-  <form action="#" method="#" id="form_member_info">
-
-    <p><label id="label_account">帳號：</label><input type="text" value="#" disabled id="input_account"><span
-        id="span_account_comment" style="font-size: 10px"> 帳號無法變更</span></p>
-    <p><label id="label_old_password">舊密碼：</label><input type="password" id="input_old_password"><span
-        id="span_old_password_comment" style="font-size: 10px" class="-none"> test</span></p>
-    <p><label id="label_password">新密碼：</label><input type="password" id="input_password"><span
-        id="span_password_comment" style="font-size: 10px" class="-none"> test</span></p>
-    <p><label id="label_password_check">確認新密碼：</label><input type="password" id="input_password_check"><span
-        id="span_password_check_comment" style="font-size: 10px" class="-none"> test</span></p>
-    <p><label id="label_name">姓名：</label><input type="text" value="#" id="input_name"><span id="span_name_comment"
-        style="font-size: 10px" class="-none"> 請與證件上之姓名相同，以免無法取餐！</span></p>
-    <p><label id="label_phone">電話：</label><input type="text" value="#" id="input_phone"><span id="span_phone_comment"
-        style="font-size: 10px" class="-none"> 請輸入手機號碼</span></p>
-    <button type="button" id="btn_reset">重填</button>
-    <button type="submit" id="btn_submit">確認修改</button>
-
-
-  </form>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form action="#" method="#" id="form_member_info">
+    
+        <p><label id="label_account">帳號：</label><input type="text" value="#" disabled id="input_account"><span
+            id="span_account_comment" style="font-size: 10px"> 帳號無法變更</span></p>
+        <p><label id="label_old_password">舊密碼：</label><input type="password" id="input_old_password"><span
+            id="span_old_password_comment" style="font-size: 10px" class="-none"> test</span></p>
+        <p><label id="label_password">新密碼：</label><input type="password" id="input_password"><span
+            id="span_password_comment" style="font-size: 10px" class="-none"> test</span></p>
+        <p><label id="label_password_check">確認新密碼：</label><input type="password" id="input_password_check"><span
+            id="span_password_check_comment" style="font-size: 10px" class="-none"> test</span></p>
+        <p><label id="label_name">姓名：</label><input type="text" value="#" id="input_name"><span id="span_name_comment"
+            style="font-size: 10px" class="-none"> 請與證件上之姓名相同，以免無法取餐！</span></p>
+        <p><label id="label_phone">電話：</label><input type="text" value="#" id="input_phone"><span id="span_phone_comment"
+            style="font-size: 10px" class="-none"> 請輸入手機號碼</span></p>
+            <div class="fl_right">
+              <button type="button" id="btn_reset">重填</button>
+              <button type="submit" id="btn_submit">確認修改</button>
+            </div>
+      </form>
+    </div>
+  </div>
 
   <!-- row5：footer -->
 
