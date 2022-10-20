@@ -106,7 +106,7 @@
                 
             </table>
             <div class="d-flex justify-content-center align-content-center">
-                <button type="button" onclick="location.href='./user_history.html'">回到所有訂單</button>
+                <button type="button" id="btn_history">回到所有訂單</button>
             </div>
         </div>
     </div>
@@ -156,9 +156,6 @@
     <script>
 
         const baseUrl = "http://localhost:8080/fastero/details";
-
-        const btn = document.querySelector("#btn_submit_query");
-        const input = document.querySelector("#input_query_order");
 
         let userId = sessionStorage.getItem("userId");
         let orderId = sessionStorage.getItem("orderId");
@@ -212,6 +209,12 @@
         document.querySelector("#a_logout").onclick = () => {
             sessionStorage.clear();
             window.location.href = "../common/index.html";
+        }
+
+        // 回到所有訂單按鈕
+        document.querySelector("#btn_history").onclick = () =>{
+            sessionStorage.removeItem("orderId");
+            window.location.href = "./user_history.html";
         }
 
     </script>

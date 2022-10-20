@@ -31,6 +31,11 @@ public class OrderMasterDAOIm implements OrderMasterDAO{
 		
 		return this.getSession().get(OrderMasterVOForHistory.class, id);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<OrderMasterVOForHistory> getByStoreName(String storeName) {
+		return this.getSession().getNamedQuery("selectByStoreName").setParameter("storeName", "%" + storeName + "%").getResultList();
+	}
 
 	@Override
 	public Integer insert(OrderMasterVOForHistory vo) {
@@ -54,13 +59,19 @@ public class OrderMasterDAOIm implements OrderMasterDAO{
 	@Override
 	public List<OrderMasterVOForHistory> getByUserId(Integer userId) {
 		
-		return this.getSession().getNamedQuery("selectByUserId").setParameter("userId", userId).getResultList();
+		return this.getSession().getNamedQuery("selectByUserId").setParameter("userId", userId)
+//				.setFirstResult(0)
+//				.setMaxResults(10)
+				.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderMasterVOForHistory> getByStoreId(Integer storeId) {
-		return this.getSession().getNamedQuery("selectByStoreId").setParameter("storeId", storeId).getResultList();
+		return this.getSession().getNamedQuery("selectByStoreId").setParameter("storeId", storeId)
+//				.setFirstResult(0)
+//				.setMaxResults(10)
+				.getResultList();
 	}
 
 }

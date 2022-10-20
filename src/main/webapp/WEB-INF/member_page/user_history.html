@@ -99,7 +99,7 @@
     </a>
     <form action="http://localhost:8080/fastero/details" method="get">
         <span class="d-flex justify-content-center align-content-center">
-            <input type="text" id="input_query_order" name="order_id" placeholder="訂單編號">
+            <input type="text" id="input_query_order" name="order_id" placeholder="訂單編號或店家關鍵字">
             <button type="button" id="btn_submit_query">送出查詢</button>
         </span>
 
@@ -171,8 +171,8 @@
 
         const baseUrl = "http://localhost:8080/fastero/orders/user";
 
-        const btn = document.querySelector("#btn_submit_query");
-        const input = document.querySelector("#input_query_order");
+        const btn_search = document.querySelector("#btn_submit_query");
+        const input_search = document.querySelector("#input_query_order");
 
         // 初次載入此頁面
         let firstLoad = true;
@@ -195,12 +195,11 @@
 
         }
 
-        //以訂單編號搜尋
-        //先以訂單編號查詢，如果之後有餘力再以訂單關鍵字
-        btn.onclick = () => {
-            let value = input.value;
 
-            if (value != "") {
+        btn_search.onclick = () => {
+            let value = input_search.value;
+            
+            if (value != "" ) {
                 get("/" + sessionStorage.getItem("userId") + "/" + value);
                 return;
             }
@@ -215,16 +214,16 @@
                 .then((data) => {
                     console.log(firstLoad);
                     console.log(data.result)
-
+                    
                     // 若初次載入時就沒有任何資料，則跳轉到空頁面
                     if (firstLoad && data.result.length == 0) {
                             window.location.href = "../common/order_blank.html";
                             return;
                         }
-                    if (data.result == null) {
-                        alert("此訂單編號不存在!");
-                        return;
-                    } else {
+
+                    if(data.code != 200){
+                        alert(data.message);
+                    }else{
                         if (data.result.length == undefined) {
                             let e = data.result;
                             document.querySelector("#order").innerHTML =
@@ -239,7 +238,7 @@
 
         function orderTamplate(orderId, orderTime, orderAmount, storeName, orderStatus) {
 
-            if (orderStatus < 2) {
+            if (orderStatus < 0) {
                 return;
             } else
 
@@ -275,7 +274,7 @@
         //訂單詳情連結
         $(document).on("click", ".a_detail", function () {
 
-            let orderId = $("td.order_id").html();
+            let orderId = $(this).closest("tr").find(".order_id")[0].innerHTML;
 
             sessionStorage.setItem('orderId', orderId)
             window.location.href = "./user_order_detail.html";

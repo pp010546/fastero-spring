@@ -22,8 +22,9 @@ import lombok.Data;
 @Data
 @Component
 @NamedQueries({
-	@NamedQuery(name = "selectByUserId", query = "FROM OrderMasterVOForHistory WHERE userId = :userId"),
-	@NamedQuery(name = "selectByStoreId", query = "FROM OrderMasterVOForHistory WHERE storeId = :storeId")
+	@NamedQuery(name = "selectByUserId", query = "FROM OrderMasterVOForHistory WHERE userId = :userId ORDER BY orderTime DESC"),
+	@NamedQuery(name = "selectByStoreId", query = "FROM OrderMasterVOForHistory WHERE storeId = :storeId"),
+	@NamedQuery(name = "selectByStoreName", query = "FROM OrderMasterVOForHistory WHERE store.storeName LIKE :storeName")
 })
 public class OrderMasterVOForHistory {
 	

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import tw.com.fasterospring.common.LocalDateTimeAdapter;
+import tw.com.fasterospring.dao.impl.StoreDAOIm;
+import tw.com.fasterospring.dao.intf.StoreDAO;
 import tw.com.fasterospring.service.intf.OrderMasterService;
+import tw.com.fasterospring.vo.StoreVO;
 
 @WebServlet("/orders/user/*")
 public class UserOrderControllerServlet extends HttpServlet {
@@ -31,7 +35,7 @@ public class UserOrderControllerServlet extends HttpServlet {
 					.setVersion(1.0)
 					.create();
 	@Autowired OrderMasterService service;
-	
+	@Autowired StoreDAOIm storeDAO;
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,15 +48,28 @@ public class UserOrderControllerServlet extends HttpServlet {
 		String pathInfo = request.getPathInfo();
 		PrintWriter out = response.getWriter();
 		
+		/* pathInfo = /orders/user/userId(/orderId)
+		 * or
+		 * pathInfo = /orders/user/userId/searchString
+		 */
 		if (pathInfo.split("/").length<=2) {
 			Integer userId = Integer.parseInt(pathInfo.split("/")[1]);
 			out.print(_gson.toJson(service.getByUserId(userId)));
 			return;
-		}else {
+			
+		// 若傳入字串皆為數字
+		}else if(pathInfo.split("/")[2].chars().allMatch( Character::isDigit)){
 			Integer userId = Integer.parseInt(pathInfo.split("/")[1]);
 			Integer orderId = Integer.parseInt(pathInfo.split("/")[2]);
 			
 			out.print(_gson.toJson(service.getByUserId(userId, orderId)));
+			
+		// 傳入字串為搜尋字串
+		}else {
+			System.out.println("name searching...");
+			String storeName = pathInfo.split("/")[2];
+			out.print(_gson.toJson(service.getByStoreName(storeName)));
+
 		}
 	}
 	

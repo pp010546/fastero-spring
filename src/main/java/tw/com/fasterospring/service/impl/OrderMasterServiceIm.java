@@ -1,5 +1,7 @@
 package tw.com.fasterospring.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +39,15 @@ public class OrderMasterServiceIm implements OrderMasterService {
 	
 	public Result getByUserId(Integer userId, Integer orderId) {
 		try {
-			
-			// 1.先把該orderId取出
-//			System.out.println("getting vo...");
 			OrderMasterVOForHistory vo = DAO.getById(orderId);
-//			if(vo == null) System.out.println("vo is null.");
-//			if(vo.getUserId() != userId) System.out.println("incorrect userId, userId is " + vo.getUserId() + ", but input id is " + userId);
-			// 2.判斷該訂單是否為空
+
 			if(vo == null || vo.getUserId() != userId) {
 				return R.fail("查無此筆訂單");
 			}
 			
 			return R.success(vo);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return R.fail(e.toString());
 		}
 	}
@@ -59,6 +57,7 @@ public class OrderMasterServiceIm implements OrderMasterService {
 		try {
 			return R.success(DAO.getByStoreId(storeId));
 		} catch (Exception e) {
+			e.printStackTrace();
 			return R.fail(e.toString());
 		}
 	}
@@ -73,6 +72,7 @@ public class OrderMasterServiceIm implements OrderMasterService {
 			
 			return R.success(vo);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return R.fail(e.toString());
 		}
 	}
@@ -81,6 +81,20 @@ public class OrderMasterServiceIm implements OrderMasterService {
 	public Result getById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Result getByStoreName(String storeName) {
+		try {
+			List<OrderMasterVOForHistory> list = DAO.getByStoreName(storeName);
+			if(!list.isEmpty()) {
+				return R.success(list);				
+			}else {
+				return R.fail("查詢無結果");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
 	}
 
 }

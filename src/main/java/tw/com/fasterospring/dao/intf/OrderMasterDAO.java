@@ -13,5 +13,6 @@ public interface OrderMasterDAO {
 	public Integer insert(OrderMasterVOForHistory vo);
 	public Integer delete(Integer id);
 	public Integer update(OrderMasterVOForHistory vo);
+	public List<OrderMasterVOForHistory> getByStoreName(String storeName);
 
 }
