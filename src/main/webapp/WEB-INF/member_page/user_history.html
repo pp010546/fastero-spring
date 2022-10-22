@@ -227,16 +227,16 @@
                         if (data.result.length == undefined) {
                             let e = data.result;
                             document.querySelector("#order").innerHTML =
-                                orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.store.storeName, e.orderStatus);
+                                orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.store.storeName, e.orderStatus, e.store.storeId);
                         } else {
                             document.querySelector("#order").innerHTML =
-                                data.result.map((e) => orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.store.storeName, e.orderStatus)).join("");
+                                data.result.map((e) => orderTamplate(e.orderId, e.orderTime, e.orderAmount, e.store.storeName, e.orderStatus, e.store.storeId)).join("");
                         };
                     }
                 })
         }
 
-        function orderTamplate(orderId, orderTime, orderAmount, storeName, orderStatus) {
+        function orderTamplate(orderId, orderTime, orderAmount, storeName, orderStatus, storeId) {
 
             if (orderStatus < 0) {
                 return;

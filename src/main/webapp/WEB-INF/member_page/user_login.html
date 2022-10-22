@@ -89,21 +89,24 @@
         </header>
     </div>
 
+
     <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
 
     <h2 class="d-flex justify-content-center align-content-center">會員登入</h2>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center d-flex">
         <div class="col-4">
-            <form action="http://192.168.18.4:8080/fastero/login/users" method="post" id="form_member_info">
-
-                <p><label id="label_account">帳號：</label><input type="text" id="input_account"></p>
-                <p><label id="label_password">密碼：</label><input type="password" id="input_password"></p>
+                <p class="d-flex justify-content-center align-content-center"><label id="label_account">帳號：</label><input type="text" id="input_account"></p>
+                <p class="d-flex justify-content-center align-content-center"><label id="label_password">密碼：</label><input type="password" id="input_password"></p>
         
-                <button type="reset" id="btn_reset">重填</button>
-                <button type="button" id="btn_submit">登入</button>
+                <div class="d-flex justify-content-center align-content-center">
+                    <button type="reset" id="btn_reset">重填</button>
+                    <span style="width: 20px;"></span>
+                    <button type="button" id="btn_submit">登入</button>
+                </div>
             </form>
         </div>
     </div>
+
     
 
     <!-- row5：footer -->
