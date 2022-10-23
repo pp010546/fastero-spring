@@ -74,11 +74,11 @@
                             <li><a href="./user_infoManage.html" id="a_info">修改資料</a></li>
                         </ul>
                     </li>
-                    <li class="active">
-                        <a class="drop" href="#" id="login_signup">登入/註冊</a>
+                    <li class="active" id="li_login_signup">
+                        <a class="drop" href="#" id="a_login_signup">登入/註冊</a>
                         <ul>
-                            <li><a href="#">我是會員</a></li>
-                            <li><a href="#">我是廠商</a></li>
+                            <li><a href="./user_login.html">我是會員</a></li>
+                            <li><a href="../store_page/store_login.html">我是廠商</a></li>
                         </ul>
                     </li>
                     <li>
@@ -89,10 +89,10 @@
         </header>
     </div>
 
-
     <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
 
     <h2 class="d-flex justify-content-center align-content-center">會員登入</h2>
+    
     <div class="row justify-content-center d-flex">
         <div class="col-4">
                 <p class="d-flex justify-content-center align-content-center"><label id="label_account">帳號：</label><input type="text" id="input_account"></p>
@@ -103,7 +103,9 @@
                     <span style="width: 20px;"></span>
                     <button type="button" id="btn_submit">登入</button>
                 </div>
-            </form>
+                <div class="d-flex justify-content-center align-content-center">
+                    <span>還沒有帳號嗎？</span><a href="./user_register.html">立即註冊</a>
+                </div>
         </div>
     </div>
 

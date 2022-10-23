@@ -17,28 +17,32 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import tw.com.fasterospring.common.LocalDateTimeAdapter;
-import tw.com.fasterospring.service.intf.OrderDetailService;
+import tw.com.fasterospring.service.intf.StoreService;
+import tw.com.fasterospring.vo.StoreVO;
 
-@WebServlet("/details/*")
-public class OrderDetailControllerServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 6349995186030977607L;
+@WebServlet("/stores/*")
+public class StoreControllerServlet extends HttpServlet {
+
+
+	private static final long serialVersionUID = -8939804920425141099L;
+
 	Gson _gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 			.enableComplexMapKeySerialization().serializeNulls().setDateFormat(DateFormat.DATE_FIELD)
 			.setPrettyPrinting().setVersion(1.0).create();
-	@Autowired
-	OrderDetailService service;
+	
+	@Autowired private StoreService service;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		setHeaders(response);
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setHeaders(response);
 		
-		String pathInfo = request.getPathInfo();
+		StoreVO vo = _gson.fromJson(request.getReader().readLine(), StoreVO.class);
+	
 		PrintWriter out = response.getWriter();
-		
-		Integer orderId = Integer.parseInt(pathInfo.split("/")[1]);
-		out.print(_gson.toJson(service.getByOrderId(orderId)));
-		return;
+		out.print(_gson.toJson(service.register(vo)));
 	}
 	
 	@Override

@@ -8,6 +8,8 @@
     <title>商家註冊</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <link rel="icon" href="../images/logo.ico">
+    <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all" />
     <style>
         form {
             border: 1px solid blue;
@@ -19,131 +21,248 @@
         table.table {
             border: 1px solid red;
         }
+
+        button {
+            display: inline;
+        }
+
+        input,
+        label {
+            display: inline;
+        }
+
+        span.-none {
+            display: none;
+        }
+
+        span {
+            color: red;
+        }
     </style>
 </head>
 
 <body>
-    <header></header>
+    <!-- row1：header + nav -->
+    <div class="row1">
+        <header id="header" class="hoc clear">
+            <a href="./index.html">
+                <img class="logo" src="../images/logo_navy.png" alt="logo" />
+            </a>
+
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li class="active">
+                        <a class="drop" href="#">我要點餐</a>
+                        <ul>
+                            <li><a href="#">商家總覽</a></li>
+                            <li><a href="#">搜尋點餐</a></li>
+                            <li><a href="#">地圖點餐</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a class="drop" href="#">訂單狀態</a>
+                        <ul>
+                            <li><a href="#">現在訂單</a></li>
+                            <li><a href="#">歷史訂單</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href="./wishlist.html">我的最愛</a></li>
+                    <li class="active"><a class="drop" href="./user_infoManage.html" id="a_user_index">會員中心</a>
+                        <ul>
+                            <li><a href="./user_history.html" id="a_history">歷史訂單</a></li>
+                            <li><a href="./user_infoManage.html" id="a_info">修改資料</a></li>
+                            <li id="li_logout"><a href="#" id="logout">登出</a></li>
+                        </ul>
+                    </li>
+                    <li class="active" id="li_login_signup">
+                        <a class="drop" href="#" id="a_login_signup">登入/註冊</a>
+                        <ul>
+                            <li><a href="#">我是會員</a></li>
+                            <li><a href="#">我是廠商</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><img class="cart" src="../images/cart.png" alt="購物車" /></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
     <h1 class="d-flex justify-content-center align-content-center">商家會員中心</h1>
 
     <h2 class="d-flex justify-content-center align-content-center">註冊會員</h2>
-    <form action="http://192.168.18.4:8080/fastero/users" method="post" id="form_member_info">
-        <h3>店家負責人資料</h3>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h3>店家負責人資料</h3>
 
-        <p><label id="label_account">帳號：</label><input type="text" id="input_account" placeholder="xxx@xxxx.xxx">
-            <span id="span_account_comment" style="font-size: 10px"> 帳號日後無法變更</span>
-        </p>
-        <p><label id="label_password">密碼：</label><input type="password" id="input_password">
-            <span id="span_password_comment" style="font-size: 10px"> 密碼須包含英文大小寫及數字</span>
-        </p>
+            <p><label id="label_account">帳號：</label><input type="text" id="input_account" placeholder="xxx@xxxx.xxx">
+                <span id="span_account_comment" style="font-size: 10px"> 帳號日後無法變更</span>
+            </p>
+            <p><label id="label_password">密碼：</label><input type="password" id="input_password">
+                <span id="span_password_comment" style="font-size: 10px"> 密碼須包含英文大小寫及數字</span>
+            </p>
 
-        <p><label id="label_password_check">確認密碼：</label><input type="password" id="input_password_check"></p>
+            <p><label id="label_password_check">確認密碼：</label><input type="password" id="input_password_check"></p>
 
-        <p><label id="label_name">姓名：</label><input type="text" value="" id="input_admin_name"></p>
+            <p><label id="label_name">姓名：</label><input type="text" value="" id="input_admin_name"></p>
 
-        <p><label id="label_name">身分證字號：</label><input type="text" value="" id="input_admin_id"></p>
+            <p><label id="label_name">身分證字號：</label><input type="text" value="" id="input_admin_id"></p>
 
-        <p><label id="label_phone">電話：</label><input type="text" value="" id="input_admin_phone" placeholder="09xxxxxxxx">
-            <span id="span_phone_comment" style="font-size: 10px"> 請輸入手機號碼</span></p>
+            <p><label id="label_phone">電話：</label><input type="text" value="" id="input_admin_phone"
+                    placeholder="09xxxxxxxx">
+                <span id="span_phone_comment" style="font-size: 10px"> 請輸入手機號碼</span>
+            </p>
 
-        <p><label id="label_phone">聯絡地址：</label><input type="text" value="" id="input_admin_address"></p>
+            <p><label id="label_phone">聯絡地址：</label><input type="text" value="" id="input_admin_address"></p>
 
-        <button type="reset" id="btn_reset">重填</button>
-    </form>
-    <form action="http://192.168.18.4:8080/fastero/users" method="post" id="form_member_info">
-        <h3>店家資料</h3>
+            <button type="reset" id="btn_reset">重填</button>
+        </div>
+        <div class="col-4">
+            <h3>店家資料</h3>
 
-        <p><label id="label_store_name">店家名稱：</label><input type="text" id="input_store_name"></p>
+            <p><label id="label_store_name">店家名稱：</label><input type="text" id="input_store_name"></p>
 
-        <p><label id="label_store_address">店家地址：</label><input type="text" id="input_store_address"></p>
+            <p><label id="label_store_address">店家地址：</label><input type="text" id="input_store_address"></p>
 
-        <p><label id="label_store_phone">店家電話：</label><input type="text" id="input_store_phone"></p>
+            <p><label id="label_store_phone">店家電話：</label><input type="text" id="input_store_phone"></p>
 
-        <p><label id="label_store_email">店家信箱：</label><input type="text" id="input_store_email"></p>
+            <p><label id="label_store_email">店家信箱：</label><input type="text" id="input_store_email"></p>
 
-        <p><label id="label_store_intro">店家介紹：</label><input type="text" id="input_store_intro"></p>
+            <p><label id="label_store_intro">店家介紹：</label><input type="text" id="input_store_intro"></p>
 
-        <p><label id="label_store_pic">店家預覽圖：</label><input type="file" id="input_store_pic"></p>
+            <p><label id="label_store_pic">店家預覽圖：</label><input type="file" id="input_store_pic"></p>
+
+            <div class="fl_right">
+                <button type="reset" id="btn_reset">重填</button>
+                <button type="button" id="btn_submit">註冊</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+
+    </div>
 
 
-        <button type="reset" id="btn_reset">重填</button>
-        <button type="button" id="btn_submit">註冊</button>
-    </form>
+
+    <!-- row5：footer -->
+
+    <div class=" row5">
+        <footer id="footer" class="hoc clear">
+
+            <h3 class="heading">Order faster, bite easier</h3>
+            <div>
+                <div class="footer_div">
+                    <h4>店家</h4>
+                    <a href="">店家總覽</a><br />
+                    <a href="">地圖搜尋</a><br />
+                </div>
+                <div class="footer_div">
+                    <h4>會員</h4>
+                    <a href="">會員中心</a><br />
+                    <a href="">登入/註冊</a><br />
+                    <a href="">我的最愛</a><br />
+                    <a href="">我的購物車</a><br />
+
+                </div>
+                <div class="footer_div">
+                    <h4>幫助</h4>
+                    <a href="">聯絡我們</a><br />
+                </div>
+            </div>
+
+            <!-- copyright宣告  -->
+
+            <div id="copyright">
+                <p>
+                    Copyright &copy; 2022 - All Rights Reserved -
+                    <a href="#">Domain Name</a>
+                </p>
+                <p class="font-xs">
+                    Template by
+                    <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS
+                        Templates</a>
+                </p>
+            </div>
+
+        </footer>
+        <script>
+            //admin
+            let account = document.querySelector("#input_account");
+            let password = document.querySelector("#input_password");
+            let password_check = document.querySelector("#input_password_check");
+            let admin_name = document.querySelector("#input_admin_name");
+            let admin_phone = document.querySelector("#input_admin_phone");
+            let admin_address = document.querySelector("#input_admin_address");
+            let admin_id = document.querySelector("#input_admin_id");
+            //store
+            let store_name = document.querySelector("#input_store_name");
+            let store_address = document.querySelector("#input_store_address");
+            let store_phone = document.querySelector("#input_store_phone");
+            let store_email = document.querySelector("#input_store_email");
+            let store_intro = document.querySelector("#input_store_intro");
+            let store_pic = document.querySelector("#input_store_pic");
+
+
+            let btn = document.querySelector("#btn_submit");
+
+            btn.onclick = () => {
+
+                if (password.value != password_check.value) {
+                    alert("確認密碼與密碼不相符");
+                    return;
+                }
+
+                let data = {
+                    storeAdminAccount: account.value,
+                    storeAdminPassword: password.value,
+                    storeAdminName: admin_name.value,
+                    storeAdminId: admin_id.value,
+                    storeAdminPhone: admin_phone.value,
+                    storeAdminAddress: admin_address.value,
+
+                    storeName: store_name.value,
+                    storeAddress: store_address.value,
+                    storePhone: store_phone.value,
+                    storeEmail: store_email.value,
+                    storeIntro: store_intro.value,
+                    // storePic: store_pic.value
+                }
+
+                fetch("http://localhost:8080/fastero/stores", {
+
+                    method: "POST", // 以 POST 為例
+                    body: JSON.stringify(data) // 欲傳送的資料
+
+                }).then(function (response) { // 接收到回傳的物件
+
+                    if (response.ok) { // 如果正確取得資料，沒有發生錯誤
+                        return response.json(); // 將取得的資料，再使用 .json() 解析資料
+                    }
+                    throw new Error(response.statusText);
+
+                }).then(function (data) { // 這裡真的取得資料：data
+
+                    if (data.code != 200) {
+                        alert(data.message);
+                    } else {
+                        alert("註冊成功!");
+                        window.location.href = "./store_history.html";
+                    }
+
+                }).catch(function (error) { // 發生任何錯誤，就會執行 catch 裡的程式
+
+                    console.log(error); // 這裡取得錯誤資訊：error
+
+                })
+            }
+
+
+
+
+        </script>
 </body>
-<script>
-    //admin
-    let account = document.querySelector("#input_account");
-    let password = document.querySelector("#input_password");
-    let password_check = document.querySelector("#input_password_check");
-    let admin_name = document.querySelector("#input_admin_name");
-    let admin_phone = document.querySelector("#input_admin_phone");
-    let admin_address = document.querySelector("#input_admin_address");
-    let admin_id = document.querySelector("#input_admin_id");
-    //store
-    let store_name = document.querySelector("#input_store_name");
-    let store_address = document.querySelector("#input_store_address");
-    let store_phone = document.querySelector("#input_store_phone");
-    let store_email = document.querySelector("#input_store_email");
-    let store_intro = document.querySelector("#input_store_intro");
-    let store_pic = document.querySelector("#input_store_pic");
-    
 
-    let btn = document.querySelector("#btn_submit");
-
-    btn.onclick = () => {
-
-        if (password.value != password_check.value) {
-            alert("確認密碼與密碼不相符");
-            return;
-        }
-
-        let data = {
-            storeAdminAccount: account.value,
-            storeAdminPassword: password.value,
-            storeAdminName: admin_name.value,
-            storeAdminId: admin_id.value,
-            storeAdminPhone: admin_phone.value,
-            storeAdminAddress: admin_address.value,
-            
-            storeName: store_name.value,
-            storeAddress: store_address.value,
-            storePhone: store_phone.value,
-            storeEmail: store_email.value,
-            storeIntro: store_intro.value,
-            // storePic: store_pic.value
-        }
-
-        fetch("http://localhost:8080/fastero/stores", {
-
-            method: "POST", // 以 POST 為例
-            body: JSON.stringify(data) // 欲傳送的資料
-
-        }).then(function (response) { // 接收到回傳的物件
-
-            if (response.ok) { // 如果正確取得資料，沒有發生錯誤
-                return response.json(); // 將取得的資料，再使用 .json() 解析資料
-            }
-            throw new Error(response.statusText);
-            
-        }).then(function (data) { // 這裡真的取得資料：data
-            
-            if (data.code != 200) {
-                alert(data.message);
-            } else {
-                alert("註冊成功!");
-                window.location.href = "./member_page.html";
-            }
-
-        }).catch(function (error) { // 發生任何錯誤，就會執行 catch 裡的程式
-
-            console.log(error); // 這裡取得錯誤資訊：error
-
-        })
-    }
-
-
-
-
-</script>
 
 </html>

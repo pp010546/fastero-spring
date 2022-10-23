@@ -65,8 +65,8 @@
                     <li class="active">
                         <a class="drop" href="#" id="login_signup">登入/註冊</a>
                         <ul>
-                            <li><a href="#">我是會員</a></li>
-                            <li><a href="#">我是廠商</a></li>
+                            <li><a href="./user_login.html">我是會員</a></li>
+                            <li><a href="../store_page/store_login.html">我是廠商</a></li>
                         </ul>
                     </li>
                     <li>
@@ -80,16 +80,15 @@
     <h1 class="d-flex justify-content-center align-content-center">會員中心</h1>
 
     <h2 class="d-flex justify-content-center align-content-center">註冊會員</h2>
-    <div class="d-flex justify-content-center align-content-center">
-        
-
+    <div class="row justify-content-center">
+        <div class="col-4">
             <p><label id="label_account">帳號：</label><input type="text" id="input_account" placeholder="xxx@xxxx.xxx">
                 <span id="span_account_comment" style="font-size: 10px"> 帳號日後無法變更</span>
             </p>
             <p><label id="label_password">密碼：</label><input type="password" id="input_password">
                 <span id="span_password_comment" style="font-size: 10px"> 密碼須包含英文大小寫及數字</span>
             </p>
-
+    
             <p><label id="label_password_check">確認密碼：</label><input type="password" id="input_password_check"></p>
             <p><label id="label_name">姓名：</label><input type="text" value="" id="input_name" name="user_name">
                 <span id="span_name_comment" style="font-size: 10px"> 請與證件上之姓名相同，以免無法取餐！</span>
@@ -100,6 +99,9 @@
                 <button type="reset" id="btn_reset">重填</button>
                 <button type="button" id="btn_submit">註冊</button>
             </div>
+
+        </div>
+
         
     </div>
 
@@ -158,13 +160,13 @@
         window.onload = () => {
 
             // 未登入狀態
-            if (sessionStorage.getItem("userId") == null) {
+            if (!sessionStorage.getItem("userId")) {
                 // 上方導覽列會員相關功能皆轉到會員登入頁面
                 document.querySelector("#a_history").setAttribute("href", "./user_login.html");
                 document.querySelector("#a_info").setAttribute("href", "./user_login.html");
                 document.querySelector("#a_user_index").setAttribute("href", "./user_login.html");
                 // 登出連結消失
-                document.querySelector("#li_logout").setAttribute("display", "none");
+                document.querySelector("#li_logout").remove();
             }
 
         }
