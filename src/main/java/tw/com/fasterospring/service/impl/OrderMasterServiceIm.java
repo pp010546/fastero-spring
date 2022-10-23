@@ -2,10 +2,9 @@ package tw.com.fasterospring.service.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.fasterospring.common.Result;
 import tw.com.fasterospring.dao.intf.OrderMasterDAO;
@@ -91,6 +90,20 @@ public class OrderMasterServiceIm implements OrderMasterService {
 			}else {
 				return R.fail("查詢無結果");
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
+	}
+
+	@Override
+	public Result updateStatus(Integer status, Integer orderId) {
+		if(status>4 || status<0) {
+			return R.fail("status is out of range!");
+		}
+		
+		try {
+			return R.success(DAO.updateStatus(status, orderId));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return R.fail(e.toString());

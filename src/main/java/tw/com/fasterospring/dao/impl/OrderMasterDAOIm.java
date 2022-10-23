@@ -50,9 +50,16 @@ public class OrderMasterDAOIm implements OrderMasterDAO{
 	}
 
 	@Override
-	public Integer update(OrderMasterVOForHistory vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer updateStatus(Integer status, Integer orderId) {
+		try {
+			this.getSession().getNamedQuery("updateStars")
+							 .setParameter("status", status)
+							 .setParameter("id", orderId)
+							 .executeUpdate();
+			return 1;
+		} catch (Exception e) {
+			return -1;
+		}
 	}
 
 	@SuppressWarnings("unchecked")

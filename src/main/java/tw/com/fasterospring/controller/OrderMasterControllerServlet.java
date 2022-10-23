@@ -17,11 +17,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import tw.com.fasterospring.common.LocalDateTimeAdapter;
-import tw.com.fasterospring.service.intf.ReviewService;
-import tw.com.fasterospring.vo.ReviewVO;
+import tw.com.fasterospring.service.intf.OrderMasterService;
+import tw.com.fasterospring.vo.OrderMasterVOForHistory;
 
-@WebServlet("/reviews/*")
-public class ReviewControllerServlet extends HttpServlet {
+@WebServlet("/orders")
+public class OrderMasterControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Gson _gson = new GsonBuilder()
 			.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
@@ -31,50 +31,34 @@ public class ReviewControllerServlet extends HttpServlet {
 			.setPrettyPrinting()
 			.setVersion(1.0)
 			.create();
-	
 	@Autowired
-	private ReviewService service;
+	OrderMasterService service;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setHeaders(response);
-		String pathInfo = request.getPathInfo();
-		PrintWriter out = response.getWriter();
-		
-		Integer orderId = Integer.parseInt(pathInfo.split("/")[1]);
-		out.print(_gson.toJson(service.getByOrderId(orderId)));
-		return;
-		
 	}
-	
-	@Override
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setHeaders(response);
-		
-		ReviewVO vo = _gson.fromJson(request.getReader().readLine(), ReviewVO.class);
-		
-		PrintWriter out = response.getWriter();
-		out.print(_gson.toJson(service.insert(vo)));
-		
-	}
-	
-	@Override
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		setHeaders(response);
-		
-		ReviewVO vo = _gson.fromJson(request.getReader().readLine(), ReviewVO.class);
-		
-		System.out.println(vo);
-		
-		PrintWriter out = response.getWriter();
-		out.print(_gson.toJson(service.updateResponse(vo.getReviewStoreResponse(), vo.getOrderId())));
 	}
 	
 	@Override
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setHeaders(response);
 	}
-
-
+	
+	@Override
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		setHeaders(response);
+		
+		OrderMasterVOForHistory vo = _gson.fromJson(request.getReader().readLine(), OrderMasterVOForHistory.class);
+		
+		PrintWriter out = response.getWriter();
+		out.print(_gson.toJson(service.updateStatus(vo.getOrderStatus(), vo.getOrderId())));
+		
+		
+	}
+	
 	private void setHeaders(HttpServletResponse response) {
 
 		response.setContentType("application/json;charset=UTF-8"); // 重要

@@ -24,7 +24,9 @@ import lombok.Data;
 @NamedQueries({
 	@NamedQuery(name = "selectByUserId", query = "FROM OrderMasterVOForHistory WHERE userId = :userId ORDER BY orderTime DESC"),
 	@NamedQuery(name = "selectByStoreId", query = "FROM OrderMasterVOForHistory WHERE storeId = :storeId ORDER BY orderTime DESC"),
-	@NamedQuery(name = "selectByStoreName", query = "FROM OrderMasterVOForHistory WHERE store.storeName LIKE :storeName ORDER BY orderTime DESC")
+	@NamedQuery(name = "selectByStoreName", query = "FROM OrderMasterVOForHistory WHERE store.storeName LIKE :storeName ORDER BY orderTime DESC"),
+	@NamedQuery(name = "updateStars", query = "UPDATE OrderMasterVOForHistory SET orderStatus = :status, updateTime = NOW() WHERE orderId = :id"),
+//	@NamedQuery(name = "insert", query = "INSERT INTO OrderMasterVOForHistory ()")
 })
 public class OrderMasterVOForHistory {
 	

@@ -12,7 +12,7 @@ public interface OrderMasterDAO {
 	public List<OrderMasterVOForHistory> getByStoreId(Integer storeId);
 	public Integer insert(OrderMasterVOForHistory vo);
 	public Integer delete(Integer id);
-	public Integer update(OrderMasterVOForHistory vo);
+	public Integer updateStatus(Integer status, Integer orderId);
 	public List<OrderMasterVOForHistory> getByStoreName(String storeName);
 
 }

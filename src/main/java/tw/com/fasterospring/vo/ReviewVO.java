@@ -20,7 +20,8 @@ import lombok.Data;
 @Data
 @Component
 @NamedQueries({
-	@NamedQuery(name = "selectByOrderId", query = "FROM ReviewVO WHERE orderId = :orderId")
+	@NamedQuery(name = "selectByOrderId", query = "FROM ReviewVO WHERE orderId = :orderId"),
+	@NamedQuery(name = "updateResponse", query = "UPDATE ReviewVO SET reviewStoreResponse = :response, responseTime = NOW() WHERE orderId = :orderId")
 })
 public class ReviewVO {
 	@Id
@@ -39,9 +40,9 @@ public class ReviewVO {
 	private String reviewText;
 	@Column(name = "review_store_response")
 	private String reviewStoreResponse;
-	@Column(name = "review_time")
+	@Column(name = "review_time", insertable = false)
 	private LocalDateTime reviewTime;
-	@Column(name = "response_time")
+	@Column(name = "response_time", insertable = false)
 	private LocalDateTime responseTime;
 
 	
