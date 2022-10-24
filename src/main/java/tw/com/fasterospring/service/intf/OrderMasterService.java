@@ -10,7 +10,7 @@ public interface OrderMasterService {
 	public Result getByStoreId(Integer storeId);
 	public Result getByStoreId(Integer storeId, Integer orderId);
 	public Result getById(Integer id);
-	public Result getByStoreName(String storeName);
+	public Result getByStoreName(String storeName, Integer userId);
 	public Result updateStatus(Integer status, Integer orderId);
 
 	

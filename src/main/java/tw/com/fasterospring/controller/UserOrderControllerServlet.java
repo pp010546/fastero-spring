@@ -67,8 +67,9 @@ public class UserOrderControllerServlet extends HttpServlet {
 		// 傳入字串為搜尋字串
 		}else {
 			System.out.println("name searching...");
+			Integer userId = Integer.parseInt(pathInfo.split("/")[1]);
 			String storeName = pathInfo.split("/")[2];
-			out.print(_gson.toJson(service.getByStoreName(storeName)));
+			out.print(_gson.toJson(service.getByStoreName(storeName, userId)));
 
 		}
 	}

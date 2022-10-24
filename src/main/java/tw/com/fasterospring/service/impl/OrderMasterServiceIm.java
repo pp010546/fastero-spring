@@ -1,5 +1,6 @@
 package tw.com.fasterospring.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,9 +83,17 @@ public class OrderMasterServiceIm implements OrderMasterService {
 		return null;
 	}
 	
-	public Result getByStoreName(String storeName) {
+	public Result getByStoreName(String storeName, Integer userId) {
 		try {
-			List<OrderMasterVOForHistory> list = DAO.getByStoreName(storeName);
+			List<OrderMasterVOForHistory> allVO = DAO.getByStoreName(storeName);
+			List<OrderMasterVOForHistory> list = new ArrayList<OrderMasterVOForHistory>();
+			
+			for(OrderMasterVOForHistory vo :allVO) {
+				if(vo.getUserId() == userId) {
+					list.add(vo);
+				}
+			}
+			
 			if(!list.isEmpty()) {
 				return R.success(list);				
 			}else {

@@ -31,8 +31,12 @@ public class StoreServiceIm implements StoreService {
 
 	@Override
 	public Result getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return R.success(DAO.getById(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
 	}
 
 	@Override
@@ -128,8 +132,64 @@ public class StoreServiceIm implements StoreService {
 
 	@Override
 	public Result update(StoreVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		// admin
+		String adminAccount = vo.getStoreAdminAccount();
+		String adminID = vo.getStoreAdminId();
+		String adminPhone = vo.getStoreAdminPhone();
+		String adminAddress = vo.getStoreAdminAddress();
+		// store
+		String storeAddress = vo.getStoreAddress();
+		String storePhone = vo.getStorePhone();
+		String storeEmail = vo.getStoreEmail();
+		String storeName = vo.getStoreName();
+		
+		try {
+			
+			List<StoreVO> allVo = DAO.getAll();
+			List<String> allAdinAccount = new ArrayList<String>();
+			List<String> allAdinID = new ArrayList<String>();
+			List<String> allAdminPhone = new ArrayList<String>();
+			List<String> allstoreAddress = new ArrayList<String>();
+			List<String> allstorePhone = new ArrayList<String>();
+			List<String> allstoreEmail = new ArrayList<String>();
+			
+
+			for (StoreVO v : allVo) {
+				allAdinAccount.add(v.getStoreAdminAccount());
+				allAdinID.add(v.getStoreAdminId());
+				allAdminPhone.add(v.getStoreAdminPhone());
+				allstoreAddress.add(v.getStoreAddress());
+				allstorePhone.add(v.getStorePhone());
+				allstoreEmail.add(v.getStoreEmail());
+			}
+			// null / blank
+			// admin
+			if(adminAccount == null || adminAccount.isBlank()) return R.fail("帳號不可為空");
+			if(adminID == null || adminID.isBlank()) return R.fail("負責人身分證字號不可為空");
+			if(adminPhone == null || adminPhone.isBlank()) return R.fail("負責人電話不可為空");
+			if(adminAddress == null || adminAddress.isBlank()) return R.fail("負責人地址不可為空");
+			// store
+			if(storeAddress == null || storeAddress.isBlank()) return R.fail("店家地址不可為空");
+			if(storePhone == null || storePhone.isBlank()) return R.fail("店家電話不可為空");
+			if(storeEmail == null || storeEmail.isBlank()) return R.fail("店家信箱不可為空");
+			if(storeName == null || storeName.isBlank()) return R.fail("店家名稱不可為空");
+			
+			
+			// format
+			// admin
+			if (!Regex.emailCheck(adminAccount)) return R.fail("負責人email格式錯誤");
+			if (!Regex.idcheck(adminID)) return R.fail("身分證格式錯誤");
+			if (!Regex.phoneCheck(adminPhone)) return R.fail("請輸入手機號碼");
+			
+			// store
+			if (!Regex.emailCheck(storeEmail)) return R.fail("店家email格式錯誤");
+			
+			// success
+			return R.success(DAO.update(vo));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.fail(e.toString());
+		}
 	}
 
 	@Override

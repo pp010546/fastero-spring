@@ -1,16 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+Template Name: Corklow
+Author: <a href="https://www.os-templates.com/">OS Templates</a>
+Author URI: https://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: https://www.os-templates.com/template-terms
+-->
+<html lang="zh-TW">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+  <title>快點享 | 美食訂餐自取</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/images/logo.ico">
+  <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all" />
 </head>
+
 <body>
-    <h1>Index</h1>
-    <a href="../member_page/user_login.html">login</a>
-    <a href="../member_page/user_history.html">history</a>
-    <a href="../member_page/user_infoManage.html">infoManage</a>
-    <a href="../member_page/user_register.html">register</a>
+
+  <!-- row1：header + nav -->
+  <div class="row1">
+    <header id="header" class="hoc clear">
+      <a href="./index.html">
+        <img class="logo" src="../images/logo_navy.png" alt="logo" />
+      </a>
+
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+          <li class="active">
+            <a class="drop" href="#">我要點餐</a>
+            <ul>
+              <li><a href="#">商家總覽</a></li>
+              <li><a href="#">搜尋點餐</a></li>
+              <li><a href="#">地圖點餐</a></li>
+            </ul>
+          </li>
+          <li class="active">
+            <a class="drop" href="#">訂單狀態</a>
+            <ul>
+              <li><a href="#">現在訂單</a></li>
+              <li><a href="../member_page/user_history.html">歷史訂單</a></li>
+            </ul>
+          </li>
+          <li class="active"><a href="./wishlist.html">我的最愛</a></li>
+          <li class="active">
+            <a class="drop" href="./user_infoManage.html">會員中心</a>
+            <ul>
+                <li><a href="../member_page/user_history.html" id="a_history">歷史訂單</a></li>
+                <li><a href="../member_page/user_infoManage.html" id="a_info">修改資料</a></li>
+                <li id="li_logout"><a href="#" id="a_logout">登出</a></li>
+            </ul>
+          </li>
+          <li class="active" id="li_login_signup">
+            <a class="drop" href="#">登入/註冊</a>
+            <ul>
+              <li><a href="../member_page/user_login.html">我是會員</a></li>
+              <li><a href="../store_page/store_login.html">我是廠商</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="../Index/cart.html"><img class="cart" src="../images/cart.png" alt="購物車" /></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+
+
+  <!-- row2：隨機推薦 -->
+  <main>
+
+    <div class="row2">
+      <div class="container2">
+        <div>
+          <h3 class="topic">今天想吃什麼？</h3>
+        </div>
+        <div class="food" style="display: flex;justify-content: center;" id="foodImg">
+          <a style="width:50%;height:50%;margin-bottom: 20px;" href="" id="randomLink">
+            <img src="" id="randomImg" alt="" />
+
+          </a>
+        </div>
+        <!-- 以下引入fontawesome的icon fa-3x是大小 要調整要去官網找 無法從css調整 -->
+        <div class="no random">
+          <i class="fa-solid fa-xmark fa-3x" id="no"></i>
+        </div>
+        <div class="next random">
+          <i class="fa-solid fa-angles-right fa-3x"></i>
+        </div>
+        <div class="love random">
+          <i class="fa-solid fa-heart fa-3x" id="heart"></i>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+
+  <!-- row5：footer -->
+
+  <div class=" row5">
+    <footer id="footer" class="hoc clear">
+
+      <h3 class="heading">Order faster, bite easier</h3>
+      <div>
+        <div class="footer_div">
+          <h4>店家</h4>
+          <a href="">店家總覽</a><br />
+          <a href="">地圖搜尋</a><br />
+        </div>
+        <div class="footer_div">
+          <h4>會員</h4>
+          <a href="">會員中心</a><br />
+          <a href="">登入/註冊</a><br />
+          <a href="">我的最愛</a><br />
+          <a href="">我的購物車</a><br />
+
+        </div>
+        <div class="footer_div">
+          <h4>幫助</h4>
+          <a href="">聯絡我們</a><br />
+        </div>
+      </div>
+
+      <!-- copyright宣告  -->
+
+      <div id="copyright">
+        <p>
+          Copyright &copy; 2022 - All Rights Reserved -
+          <a href="#">Domain Name</a>
+        </p>
+        <p class="font-xs">
+          Template by
+          <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a>
+        </p>
+      </div>
+
+    </footer>
+  </div>
+
+
+  <!-- JAVASCRIPTS -->
+  <script src="../layout/scripts/index.js"></script>
+
+  <!-- <script src="../layout/scripts/jquery.min.js"></script>
+  <script src="../layout/scripts/jquery.backtotop.js"></script>
+  <script src="../layout/scripts/jquery.mobilemenu.js"></script> -->
+  <!-- fontawesome -->
+  <script src="https://kit.fontawesome.com/f13b4d1fd8.js" crossorigin="anonymous"></script>
+
 </body>
+
 </html>

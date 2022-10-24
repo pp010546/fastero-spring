@@ -75,7 +75,7 @@
     <!-- row1：header + nav -->
     <div class="row1">
         <header id="header" class="hoc clear">
-            <a href="./index.html">
+            <a href="../common/index.html">
                 <img class="logo" src="../images/logo_navy.png" alt="logo" />
             </a>
 
@@ -92,8 +92,8 @@
                     <li class="active">
                         <a class="drop" href="#">訂單狀態</a>
                         <ul>
-                            <li><a href="#">現在訂單</a></li>
-                            <li><a href="#">歷史訂單</a></li>
+                            <li><a href="./user_current_order.html">現在訂單</a></li>
+                            <li><a href="">歷史訂單</a></li>
                         </ul>
                     </li>
                     <li class="active"><a href="./wishlist.html">我的最愛</a></li>
@@ -271,13 +271,12 @@
                 </div>
                 <!-- footer -->
                 <div class="modal-footer">
-                    
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- 載入 Font Awesome -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script> -->
+    
     <script src="https://code.jquery.com/jquery-3.6.1.js"
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script>
@@ -301,7 +300,7 @@
 
                 document.querySelector("#li_login_signup").innerHTML = `Hi, ${sessionStorage.getItem("userName")}`;
 
-            // 未登入時
+                // 未登入時
             } else {
                 confirm("尚未登入！是否要登入？取消則回到首頁") ? window.location.href = "./user_login.html" : window.location.href = "../common/index.html";
             }
@@ -322,18 +321,18 @@
             await fetch(baseUrl + id)
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(firstLoad);
-                    console.log(data.result)
-
+                    
                     // 若初次載入時就沒有任何資料，則跳轉到空頁面
                     if (firstLoad && data.result.length == 0) {
-                        window.location.href = "../common/order_blank.html";
+                        alert("目前尚無訂單，即將帶您回到首頁點餐");
+                        window.location.href = "../common/index.html";
                         return;
                     }
-
                     if (data.code != 200) {
                         alert(data.message);
+
                     } else {
+                        
                         if (data.result.length == undefined) {
                             let e = data.result;
                             document.querySelector("#order").innerHTML =
@@ -350,8 +349,8 @@
 
             if (orderStatus < 2) {
                 return;
-            } else
-
+            } else {
+                firstLoad = false;
                 switch (orderStatus) {
 
                     case 2:
@@ -389,8 +388,8 @@
                     default:
                         break;
                 }
-
-            firstLoad = false;
+                
+            }
         }
 
         //訂單詳情連結
@@ -519,7 +518,7 @@
                     console.log(error); // 這裡取得錯誤資訊：error
 
                 });
-                
+
                 // 更新訂單狀態
                 fetch("http://localhost:8080/fastero/orders", {
                     headers: {

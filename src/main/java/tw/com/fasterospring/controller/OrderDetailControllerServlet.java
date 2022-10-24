@@ -21,8 +21,8 @@ import tw.com.fasterospring.service.intf.OrderDetailService;
 
 @WebServlet("/details/*")
 public class OrderDetailControllerServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 6349995186030977607L;
+	private static final long serialVersionUID = 1L;
+
 	Gson _gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 			.enableComplexMapKeySerialization().serializeNulls().setDateFormat(DateFormat.DATE_FIELD)
 			.setPrettyPrinting().setVersion(1.0).create();

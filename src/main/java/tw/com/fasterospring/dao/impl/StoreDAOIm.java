@@ -36,8 +36,7 @@ public class StoreDAOIm implements StoreDAO {
 
 	@Override
 	public StoreVO getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (StoreVO) this.getSession().getNamedQuery("selectById").setParameter("id", id).getSingleResult();
 	}
 
 	@Override
@@ -59,8 +58,13 @@ public class StoreDAOIm implements StoreDAO {
 
 	@Override
 	public Integer update(StoreVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			this.getSession().merge(vo);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>歷史訂單</title>
+    <title>現在訂單</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
@@ -90,8 +90,8 @@
                     <li class="active">
                         <a class="drop" href="#">訂單狀態</a>
                         <ul>
-                            <li><a href="./store_current_order.html">現在訂單</a></li>
-                            <li><a href="">歷史訂單</a></li>
+                            <li><a href="#">現在訂單</a></li>
+                            <li><a href="#">歷史訂單</a></li>
                         </ul>
                     </li>
                     <li class="active"><a href="./wishlist.html">我的最愛</a></li>
@@ -137,7 +137,8 @@
                     <th>訂單日期與時間</th>
                     <th>訂單金額</th>
                     <th>訂單明細</th>
-                    <th>評論</th>
+                    <th>訂單狀態</th>
+                    <th>備餐完成</th>
                 </tr>
             </thead>
             <tbody id="order">
@@ -187,104 +188,11 @@
 
         </footer>
     </div>
-    <!-- 評論彈窗(撰寫) -->
-    <div class="modal fade" id="reviewModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- header -->
-                <div class="modal-header">
-                    <h3>客人的評論</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- body -->
-                <div class="modal-body">
-                    <form>
-                        <!-- 評分星星 -->
-                        <div class="form-group">
-                            <div class="star_block">
-                                <span class="star" data-star="1"><i class="fa fa-star"></i></span>
-                                <span class="star" data-star="2"><i class="fa fa-star"></i></span>
-                                <span class="star" data-star="3"><i class="fa fa-star"></i></span>
-                                <span class="star" data-star="4"><i class="fa fa-star"></i></span>
-                                <span class="star" data-star="5"><i class="fa fa-star"></i></span>
-                            </div>
-                        </div>
-                        <!-- 評論內容 -->
-                        <div class="form-group">
-                            <textarea class="text_review_read" cols="30" rows="10" readonly="true"></textarea>
-                            <span class="span_review_time"></span>
-                        </div>
-                        <!-- 店家回覆 -->
-                        <span>店家回覆</span>
-                        <div class="form-group">
-                            <textarea class="text_response_write" cols="30" rows="10"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="checkbox" class="check">我已確認內容無違反站方規定
-                        </div>
-
-                        <button type="button" class="btn btn-info btn_review_submit">送出</button>
-                    </form>
-                </div>
-                <!-- footer -->
-                <div class="modal-footer">
-
-                    <span>請勿發表過激、歧視性等違反站方規定之發言</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 評論彈窗(瀏覽) -->
-    <div class="modal fade" id="reviewModal_read">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- header -->
-                <div class="modal-header">
-                    <h3>您的評論</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- body -->
-                <div class="modal-body">
-                    <form>
-                        <!-- 評分星星 -->
-                        <div class="form-group">
-                            <div class="star_block">
-                                <span class="star" data-star="1"><i class="fa fa-star"></i></span>
-                                <span class="star" data-star="2"><i class="fa fa-star"></i></span>
-                                <span class="star" data-star="3"><i class="fa fa-star"></i></span>
-                                <span class="star" data-star="4"><i class="fa fa-star"></i></span>
-                                <span class="star" data-star="5"><i class="fa fa-star"></i></span>
-                            </div>
-                        </div>
-                        <!-- 評論內容 -->
-                        <div class="form-group">
-                            <textarea class="text_review_read" cols="30" rows="10" readonly="true"></textarea>
-                            <span class="span_review_time"></span>
-                        </div>
-                        <!-- 店家回覆 -->
-                        <span>店家回覆</span>
-                        <div class="form-group">
-                            <textarea id="text_response_read" cols="30" rows="10" readonly="true"></textarea>
-                        </div>
-                        <span class="span_response_time"></span>
-                    </form>
-                </div>
-                <!-- footer -->
-                <div class="modal-footer">
-
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.1.js"
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script>
-        // "orderId": 1,
-        // "productId": 6,
-        // "price": 180,
-        // "quantity": 1
+
         const baseUrl = "http://localhost:8080/fastero/orders/store";
 
         const btn = document.querySelector("#btn_submit_query");
@@ -297,8 +205,8 @@
             if (sessionStorage.getItem("storeId") != null) {
 
                 document.querySelector("#li_login_signup").innerHTML = `Hi, ${sessionStorage.getItem("storeName")}`;
-            // 未登入    
-            }else{
+                // 未登入    
+            } else {
                 confirm("尚未登入！是否要登入？取消則回到首頁") ? window.location.href = "./store_login.html" : window.location.href = "../common/index.html";
             }
             get("/" + sessionStorage.getItem('storeId'));
@@ -347,43 +255,36 @@
 
             firstLoad = false;
 
-            if (orderStatus < 2) {
+            if (orderStatus > 2) {
                 return;
             } else
 
                 switch (orderStatus) {
 
-                    case 2:
-                        orderStatus = "取餐完成，客人尚未評論"
+                    case 0:
+                        orderStatus = "備餐中"
                         return `<tr>
                                 <td class="order_id">${orderId}</td>
                                 <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0, 5)}</td>
                                 <td>${orderAmount}</td>
                                 <td><a href="#" class="a_detail">查看</a></td>
-                                <td><a href="#">${orderStatus}</span></td>
+                                <td><a href="#" class="a_status">${orderStatus}</span></td>
+                                <td><input type="checkbox" class="finish">
                             </tr>`
                         break;
 
-                    case 3:
-                        orderStatus = "客人已評論，點擊回覆"
+                    case 1:
+                        orderStatus = "備餐完成，等待取餐"
                         return `<tr>
                                 <td class="order_id">${orderId}</td>
                                 <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0, 5)}</td>
                                 <td>${orderAmount}</td>
                                 <td><a href="#" class="a_detail">查看</a></td>
-                                <td><a href="#" type="button" class="a_comment" data-bs-toggle="modal" data-bs-target="#reviewModal">${orderStatus}</td>
+                                <td><a href="#" type="button" class="a_status">${orderStatus}</td>
+                                <td><input type="checkbox" class="finish" disabled checked="true">
                             </tr>`
                         break;
-                    case 4:
-                        orderStatus = "已回覆"
-                        return `<tr>
-                                    <td class="order_id">${orderId}</td>
-                                    <td>${orderTime.split("T")[0] + "\t" + orderTime.split("T")[1].substring(0, 5)}</td>
-                                    <td>${orderAmount}</td>
-                                    <td><a href="#" class="a_detail">查看</a></td>
-                                    <td><a href="#" type="button" class="a_comment -read" data-bs-toggle="modal" data-bs-target="#reviewModal_read">${orderStatus}</td>
-                                </tr>`
-                        break;
+
                     default:
                         break;
                 }
@@ -550,6 +451,56 @@
             sessionStorage.clear();
             window.location.href = "../common/index.html";
         })
+
+        // 備餐完成按鈕
+        $(document).on("click", ".finish", function () {
+
+            confirm("確認已備餐完畢？按下確定後即通知客人取餐。") ? update_order($(this)) : $(this)[0].checked = false;
+
+        })
+
+        // 備餐完畢方法
+        function update_order(checkbox) {
+            // 改變頁面顯示
+            checkbox[0].setAttribute("disabled", true);
+            checkbox.closest('tr').find("a.a_status").html("備餐完畢")
+
+            // 更新資料庫
+
+            let orderId = checkbox.closest('tr').find(".order_id").html();
+            console.log(orderId);
+
+            let data = {
+                orderId: orderId,
+                orderStatus: "1"
+            }
+
+            fetch("http://localhost:8080/fastero/orders", {
+                headers: {
+                    'content-type': 'application/json'
+                },
+                method: "PUT", // 以 POST 為例
+                body: JSON.stringify(data) // 欲傳送的資料
+
+            }).then(function (response) { // 接收到回傳的物件
+
+                if (response.ok) { // 如果正確取得資料，沒有發生錯誤
+                    return response.json(); // 將取得的資料，再使用 .json() 解析資料
+                }
+                throw new Error(response.statusText);
+
+            }).then(function (data) { // 這裡真的取得資料：data
+
+                if (data.code == 200) {
+                    console.log("status updated!");
+                } else {
+                    console.log(data.message);
+                }
+            }).catch(function (error) { // 發生任何錯誤，就會執行 catch 裡的程式
+                console.log(error); // 這裡取得錯誤資訊：error
+            });
+
+        };
     </script>
 
 </body>

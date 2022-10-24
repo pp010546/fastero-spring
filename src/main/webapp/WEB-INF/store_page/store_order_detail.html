@@ -33,7 +33,7 @@
     <!-- row1：header + nav -->
     <div class="row1">
         <header id="header" class="hoc clear">
-            <a href="./index.html">
+            <a href="../common/index.html">
                 <img class="logo" src="../images/logo_navy.png" alt="logo" />
             </a>
 
@@ -106,7 +106,7 @@
                 
             </table>
             <div class="d-flex justify-content-center align-content-center">
-                <button type="button" id="btn_history">回到所有訂單</button>
+                <button type="button" id="btn_history">回到上一頁</button>
             </div>
         </div>
     </div>
@@ -214,7 +214,7 @@
         // 回到所有訂單按鈕
         document.querySelector("#btn_history").onclick = () =>{
             sessionStorage.removeItem("orderId");
-            window.location.href = "./store_history.html";
+            history.back();
         }
 
     </script>

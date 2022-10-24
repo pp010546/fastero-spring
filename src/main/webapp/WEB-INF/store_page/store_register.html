@@ -45,7 +45,7 @@
     <!-- row1：header + nav -->
     <div class="row1">
         <header id="header" class="hoc clear">
-            <a href="./index.html">
+            <a href="../common/index.html">
                 <img class="logo" src="../images/logo_navy.png" alt="logo" />
             </a>
 
@@ -69,16 +69,15 @@
                     <li class="active"><a href="./wishlist.html">我的最愛</a></li>
                     <li class="active"><a class="drop" href="./user_infoManage.html" id="a_user_index">會員中心</a>
                         <ul>
-                            <li><a href="./user_history.html" id="a_history">歷史訂單</a></li>
-                            <li><a href="./user_infoManage.html" id="a_info">修改資料</a></li>
-                            <li id="li_logout"><a href="#" id="logout">登出</a></li>
+                            <li><a href="./store_login.html" id="a_history">歷史訂單</a></li>
+                            <li><a href="./store_login.html" id="a_info">修改資料</a></li>
                         </ul>
                     </li>
                     <li class="active" id="li_login_signup">
                         <a class="drop" href="#" id="a_login_signup">登入/註冊</a>
                         <ul>
-                            <li><a href="#">我是會員</a></li>
-                            <li><a href="#">我是廠商</a></li>
+                            <li><a href="../member_page/user_login.html">我是會員</a></li>
+                            <li><a href="./store_login.html">我是廠商</a></li>
                         </ul>
                     </li>
                     <li>
@@ -129,9 +128,10 @@
 
             <p><label id="label_store_email">店家信箱：</label><input type="text" id="input_store_email"></p>
 
-            <p><label id="label_store_intro">店家介紹：</label><input type="text" id="input_store_intro"></p>
+            <p><label id="label_store_intro">店家介紹：</label><textarea id="input_store_intro" cols="50" rows="5"></textarea></p>
 
-            <p><label id="label_store_pic">店家預覽圖：</label><input type="file" id="input_store_pic"></p>
+            <p><label id="label_store_pic">店家預覽圖：</label><input type="file" id="input_store_pic" onchange="encodeImageFileAsURL(this)">
+                <img id="img_preview"></p>
 
             <div class="fl_right">
                 <button type="reset" id="btn_reset">重填</button>
@@ -204,10 +204,30 @@
             let store_intro = document.querySelector("#input_store_intro");
             let store_pic = document.querySelector("#input_store_pic");
 
+            // image
+            let image;
+            let jpeg = "data:image/jpeg;base64,";
+
+            // convert image to base64
+            function encodeImageFileAsURL(element) {
+                var file = element.files[0];
+                var reader = new FileReader();
+                reader.onloadend = function () {
+        
+                    // console.log('RESULT', reader.result);
+                    image = reader.result.substring(23);
+                    document.querySelector("#img_preview").setAttribute("src", jpeg + image);
+
+                }
+                reader.readAsDataURL(file);
+            }
+
 
             let btn = document.querySelector("#btn_submit");
 
             btn.onclick = () => {
+
+                console.log(image)
 
                 if (password.value != password_check.value) {
                     alert("確認密碼與密碼不相符");
@@ -226,8 +246,8 @@
                     storeAddress: store_address.value,
                     storePhone: store_phone.value,
                     storeEmail: store_email.value,
-                    storeIntro: store_intro.value,
-                    // storePic: store_pic.value
+                    storeIntroduction: store_intro.value,
+                    storeImg: image
                 }
 
                 fetch("http://localhost:8080/fastero/stores", {

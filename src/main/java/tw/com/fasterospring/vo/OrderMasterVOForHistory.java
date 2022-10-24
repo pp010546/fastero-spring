@@ -1,9 +1,11 @@
 package tw.com.fasterospring.vo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -53,5 +56,7 @@ public class OrderMasterVOForHistory {
 	@JoinColumn(name = "store_id", insertable = false, updatable = false)
 	private StoreVO store;
 	
-
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "order_id", referencedColumnName = "order_id", insertable = false, updatable = false)
+	private List<OrderDetailVO> detail;
 }

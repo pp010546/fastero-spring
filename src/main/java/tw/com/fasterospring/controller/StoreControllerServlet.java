@@ -34,6 +34,11 @@ public class StoreControllerServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setHeaders(response);
+		
+		String pathInfo = request.getPathInfo();
+		if(pathInfo != null) {
+			response.getWriter().print(_gson.toJson(service.getById(Integer.parseInt(pathInfo.split("/")[1]))));
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,8 +46,24 @@ public class StoreControllerServlet extends HttpServlet {
 		
 		StoreVO vo = _gson.fromJson(request.getReader().readLine(), StoreVO.class);
 	
+//		byte[] bArray = Base64.getDecoder().decode(vo.getStoreImg());
+		System.out.println("img:" + vo.getStoreImg());
+		
 		PrintWriter out = response.getWriter();
 		out.print(_gson.toJson(service.register(vo)));
+	}
+	
+	@Override
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		setHeaders(response);
+		
+		System.out.println("SCS: doPut...");
+		
+		PrintWriter out = response.getWriter();
+		
+		StoreVO vo = _gson.fromJson(request.getReader().readLine(), StoreVO.class);
+		
+		out.print(_gson.toJson(service.update(vo)));
 	}
 	
 	@Override

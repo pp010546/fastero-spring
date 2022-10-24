@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>現在訂單</title>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <link rel="icon" href="../images/logo.ico">
+    <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all" />
+    <style>
+        form {
+            /* border: 1px solid blue; */
+            margin: 20px 60px;
+        }
+
+        button {
+            display: inline;
+        }
+
+        input,
+        label {
+            display: inline;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            resize: none;
+        }
+
+        /* 星星 */
+        div.star_block {
+            display: inline-block;
+        }
+
+        div.star_block>span.star {
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 3px;
+        }
+
+        div.star_block>span.star.-on {
+            color: yellow;
+        }
+
+        img {
+            max-width: 30%;
+            max-height: 30%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- row1：header + nav -->
+    <div class="row1">
+        <header id="header" class="hoc clear">
+            <a href="../common/index.html">
+                <img class="logo" src="../images/logo_navy.png" alt="logo" />
+            </a>
+
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li class="active">
+                        <a class="drop" href="#">我要點餐</a>
+                        <ul>
+                            <li><a href="#">商家總覽</a></li>
+                            <li><a href="#">搜尋點餐</a></li>
+                            <li><a href="#">地圖點餐</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a class="drop" href="#">訂單狀態</a>
+                        <ul>
+                            <li><a href="#">現在訂單</a></li>
+                            <li><a href="#">歷史訂單</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href="./wishlist.html">我的最愛</a></li>
+                    <li class="active">
+                        <a class="drop" href="./user_infoManage.html">會員中心</a>
+                        <ul>
+                            <li><a href="./user_history.html" id="a_history">歷史訂單</a></li>
+                            <li><a href="./user_infoManage.html" id="a_info">修改資料</a></li>
+                            <li id="li_logout"><a href="#" id="a_logout">登出</a></li>
+                        </ul>
+                    </li>
+                    <li class="active" id="li_login_signup">
+                        <a class="drop" href="#" id="a_login_signup">登入/註冊</a>
+                        <ul>
+                            <li><a href="./user_login.html">我是會員</a></li>
+                            <li><a href="#">我是廠商</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><img class="cart" src="../images/cart.png" alt="購物車" /></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <h2 class="d-flex justify-content-center align-content-center">現在訂單</h2>
+
+    <div id="container">
+        <!-- <div class="img d-flex justify-content-center align-content-center">
+            <img src="#" id="img_store">
+        </div>
+        <div id="div_status">
+            <p class="d-flex justify-content-center align-content-center">
+                <label for="span.status">訂單狀態：</label><span id="span_status">test</span>
+            </p>
+        </div>
+        <div id="div_time">
+            <p class="d-flex justify-content-center align-content-center">
+                <label for="span.time">預計完成時間：</label><span id="span_time">time</span>
+            </p>
+        </div> -->
+    </div>
+
+
+
+    <!-- row5：footer -->
+
+    <div class=" row5">
+        <footer id="footer" class="hoc clear">
+
+            <h3 class="heading">Order faster, bite easier</h3>
+            <div>
+                <div class="footer_div">
+                    <h4>店家</h4>
+                    <a href="">店家總覽</a><br />
+                    <a href="">地圖搜尋</a><br />
+                </div>
+                <div class="footer_div">
+                    <h4>會員</h4>
+                    <a href="">會員中心</a><br />
+                    <a href="">登入/註冊</a><br />
+                    <a href="">我的最愛</a><br />
+                    <a href="">我的購物車</a><br />
+
+                </div>
+                <div class="footer_div">
+                    <h4>幫助</h4>
+                    <a href="">聯絡我們</a><br />
+                </div>
+            </div>
+
+            <!-- copyright宣告  -->
+
+            <div id="copyright">
+                <p>
+                    Copyright &copy; 2022 - All Rights Reserved -
+                    <a href="#">Domain Name</a>
+                </p>
+                <p class="font-xs">
+                    Template by
+                    <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS
+                        Templates</a>
+                </p>
+            </div>
+
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script>
+        const user_URL = "http://localhost:8080/fastero/orders/user/";
+        const store_URL = "http://localhost:8080/fastero/orders/store/";
+
+        window.onload = () => {
+            // 檢查登入狀態
+            if (sessionStorage.getItem("userId")) {
+                // 如果有登入，要將上面的「登入/註冊」改為招呼語
+                document.querySelector("#li_login_signup").innerHTML = `Hi, ${sessionStorage.getItem("userName")}`;
+
+                fetch(user_URL + sessionStorage.getItem("userId"))
+                    .then((res) => res.json())
+                    .then((data) => {
+                        if (data.code != 200) {
+                            alert(data.message);
+                        } else {
+                            document.querySelector("#container").innerHTML =
+                                data.result.map((e) => templet(e.store.storeImg, e.orderStatus, e.detail, e.orderTime, e.orderId)).join("");
+                        }
+                    })
+
+            } else {
+                confirm("尚未登入！是否要登入？取消則回到首頁") ? window.location.href = "./user_login.html" : window.location.href = "../common/index.html";
+            }
+        }
+
+        function templet(storeImg, orderStatus, detail_list, orderTime, orderId) {
+            let jpeg = "data:image/jpeg;base64,";
+            let wait_time = 0;
+
+            for (i = 0; i < detail_list.length; i++) {
+
+                if (detail_list[i].product.productWaitTime > wait_time) {
+                    wait_time = detail_list[i].product.productWaitTime;
+                }
+
+            }
+
+            let hour = parseInt(orderTime.split("T")[1].substring(0, 3));
+            let minute = parseInt(orderTime.split("T")[1].substring(3, 5));
+
+            if (minute + wait_time < 60) {
+                minute += wait_time;
+            } else {
+                hour++;
+                minute = minute + wait_time - 60;
+            }
+
+            if (orderStatus > 2) {
+                return;
+            } else {
+                switch (orderStatus) {
+
+                    case 0: orderStatus = "準備中，請稍候"
+
+
+
+                        return `
+                            <div class="block">
+                                <div class="img d-flex justify-content-center align-content-center">
+                                    <img src="${jpeg + storeImg}" class="img_store">
+                                </div>
+                                <div class="div_number">
+                                    <p class="d-flex justify-content-center align-content-center">
+                                        <label for="span.number">訂單編號：</label><span id="span_number">${orderId}</span>
+                                    </p>
+                                </div>
+                                <div class="div_status">
+                                    <p class="d-flex justify-content-center align-content-center">
+                                        <label for="span.status">訂單狀態：</label><span id="span_status">${orderStatus}</span>
+                                    </p>
+                                </div>
+                                <div id="div_time">
+                                    <p class="d-flex justify-content-center align-content-center">
+                                        <label for="span.time">預計完成時間：</label><span id="span_time">${hour}:${minute}</span>
+                                    </p>
+                                </div>
+                            </div>`
+                    case 1: orderStatus = "餐點已準備完成，請前往取餐"
+                        return `
+                        <div class="block">
+                            <div class="img d-flex justify-content-center align-content-center">
+                                    <img src="${jpeg + storeImg}" class="img_store">
+                                </div>
+                                <div class="div_number">
+                                    <p class="d-flex justify-content-center align-content-center">
+                                        <label for="span.number">訂單編號：</label><span id="span_number">${orderId}</span>
+                                    </p>
+                                </div>
+                                <div class="div_status">
+                                    <p class="d-flex justify-content-center align-content-center">
+                                        <label for="span.status">訂單狀態：</label><span id="span_status">${orderStatus}</span>
+                                        </p>
+                                        <p class="d-flex justify-content-center align-content-center">
+                                            <input type="checkbox" class="take">已取餐
+                                        </p>
+                                </div>
+                        </div>`
+                }
+            }
+        }
+
+        // 登出連結
+        document.querySelector("#a_logout").onclick = () => {
+            sessionStorage.clear();
+            window.location.href = "../common/index.html";
+        }
+
+        // 取餐按鈕
+        $(document).on("click", ".take", function () {
+            confirm("確認取餐？按下確定後即視為此筆訂單已完成。") ? update_order($(this)) : $(this)[0].checked = false;
+        })
+
+        // 取餐方法
+        function update_order(check) {
+
+            // 更新資料庫
+            let orderId = check.closest(".block").find("#span_number").html();
+            
+            let data = {
+                orderId: orderId,
+                orderStatus: "2"
+            }
+
+            fetch("http://localhost:8080/fastero/orders", {
+                headers: {
+                    'content-type': 'application/json'
+                },
+                method: "PUT", // 以 POST 為例
+                body: JSON.stringify(data) // 欲傳送的資料
+
+            }).then(function (response) { // 接收到回傳的物件
+
+                if (response.ok) { // 如果正確取得資料，沒有發生錯誤
+                    return response.json(); // 將取得的資料，再使用 .json() 解析資料
+                }
+                throw new Error(response.statusText);
+
+            }).then(function (data) { // 這裡真的取得資料：data
+
+                if (data.code == 200) {
+                    console.log("status updated!");
+                    // 更新頁面
+                    check.closest("div.block").remove();
+                } else {
+                    console.log(data.message);
+                }
+            }).catch(function (error) { // 發生任何錯誤，就會執行 catch 裡的程式
+                console.log(error); // 這裡取得錯誤資訊：error
+            });
+
+        }
+    </script>
+</body>
+
+</html>

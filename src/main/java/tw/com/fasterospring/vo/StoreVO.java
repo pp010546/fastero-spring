@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,7 +25,8 @@ import lombok.Data;
 @Component
 @NamedQueries({
 	@NamedQuery(name = "selectAllStore", query = "FROM StoreVO"),
-	@NamedQuery(name = "selectStoreByAccount", query = "FROM StoreVO WHERE storeAdminAccount = :account")
+	@NamedQuery(name = "selectStoreByAccount", query = "FROM StoreVO WHERE storeAdminAccount = :account"),
+	@NamedQuery(name = "selectById", query = "FROM StoreVO WHERE storeId = :id")
 })
 public class StoreVO {
 	
@@ -52,8 +54,9 @@ public class StoreVO {
 	private String storeAdminPhone;
 	@Column(name = "store_admin_address")
 	private String storeAdminAddress;
-	@Column(name = "store_preview_img")
-	private Blob storeImg;
+	@Lob
+	@Column(name = "store_preview_img", columnDefinition = "longBlob")
+	private String storeImg;
 	@Column(name = "store_introduction")
 	private String storeIntroduction;
 	@Column(name = "store_open_status")
